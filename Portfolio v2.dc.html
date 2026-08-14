@@ -318,14 +318,21 @@
           <span style="color: var(--acc, #4fb9af);">{{ active.kicker }}</span>
         </div>
         <div style="flex: 1; min-height: 0; padding: 34px; display: flex;">
-          <div style="position: relative; flex: 1; border: 1px solid rgba(233, 227, 215, 0.26); background-image: repeating-linear-gradient(135deg, #302d28 0 9px, #383430 9px 18px);">
+          <div style="{{ active.frameBoxStyle }}">
+            <sc-if value="{{ active.hasFrameImage }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ active.frameImage }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+            </sc-if>
             <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
-              <div style="position: absolute; inset: 24px; display: flex; align-items: center; justify-content: center;">
-                <textarea value="{{ active.frameCaption }}" oninput="{{ active.setFrameCaption }}" rows="3" placeholder="Frame caption" style="width: 100%; background: rgba(0,0,0,0.35); border: 1px dashed var(--acc, #4fb9af); color: #e9e3d7; text-align: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px; resize: vertical;"></textarea>
-              </div>
+              <sc-if value="{{ !active.hasFrameImage }}" hint-placeholder-val="{{ true }}">
+                <div style="position: absolute; inset: 24px; display: flex; align-items: center; justify-content: center;">
+                  <textarea value="{{ active.frameCaption }}" oninput="{{ active.setFrameCaption }}" rows="3" placeholder="Frame caption" style="width: 100%; background: rgba(0,0,0,0.35); border: 1px dashed var(--acc, #4fb9af); color: #e9e3d7; text-align: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px; resize: vertical;"></textarea>
+                </div>
+              </sc-if>
             </sc-if>
             <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
-              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9c968a;">{{ active.frameCaption }}</div>
+              <sc-if value="{{ !active.hasFrameImage }}" hint-placeholder-val="{{ true }}">
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9c968a;">{{ active.frameCaption }}</div>
+              </sc-if>
             </sc-if>
             <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
               <input value="{{ active.frameLabel }}" oninput="{{ active.setFrameLabel }}" style="position: absolute; right: 0; bottom: 0; width: 130px; text-align: right; background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); border: 0; padding: 8px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.16em;">
@@ -344,7 +351,14 @@
           </sc-for>
         </div>
         <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; gap: 10px; padding: 12px 20px; border-top: 1px solid rgba(233, 227, 215, 0.24);">
+          <div style="display: flex; gap: 10px; padding: 12px 20px; border-top: 1px solid rgba(233, 227, 215, 0.24); flex-wrap: wrap;">
+            <label style="cursor: pointer; flex: 1; text-align: center; background: var(--acc, #4fb9af); border: 0; color: var(--on-acc, #14312e); padding: 9px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">
+              {{ active.imageButtonLabel }}
+              <input type="file" accept="image/*" onchange="{{ active.onFrameImageFile }}" style="display: none;">
+            </label>
+            <sc-if value="{{ active.hasFrameImage }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ active.clearFrameImage }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(233,227,215,0.4); color: #e9c3c3; padding: 9px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">Remove image</button>
+            </sc-if>
             <button onClick="{{ active.addFrame }}" style="cursor: pointer; flex: 1; background: transparent; border: 1px dashed var(--acc, #4fb9af); color: var(--acc, #4fb9af); padding: 9px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">+ Add frame</button>
             <sc-if value="{{ active.canRemoveFrame }}" hint-placeholder-val="{{ false }}">
               <button onClick="{{ active.removeFrame }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(233,227,215,0.4); color: #e9c3c3; padding: 9px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">Remove frame</button>
@@ -427,42 +441,72 @@ const DATA = [
     idea: "Placeholder case study standing in for your first project — swap this copy for the real brief and the structure holds.",
     system: "A mark, a two-weight lockup, one accent and a grid specification that carries across print and screen.",
     tags: ["Logotype", "Grid", "Print", "Guidelines"],
-    frames: [["Mark", "Primary mark, clear space and minimum size"], ["Palette", "Ink, ground and the single accent"], ["Application", "Stationery and signage tests"], ["Spec", "Grid and type specification sheet"]]
+    frames: [
+      { label: "Mark", caption: "Primary mark, clear space and minimum size", image: "" },
+      { label: "Palette", caption: "Ink, ground and the single accent", image: "" },
+      { label: "Application", caption: "Stationery and signage tests", image: "" },
+      { label: "Spec", caption: "Grid and type specification sheet", image: "" }
+    ]
   },
   {
     title: "Meridian", tagline: "Specialty roaster, Manila", kicker: "Identity / Packaging", year: "2026",
     idea: "Meridian roasts single origins in small batches and needed shelf presence without a mascot. The identity is a compass bearing set as type — each origin gets its own degree mark, so the range reads as one family at a glance.",
     system: "A monolinear logotype, a four-column label grid and origin coding by number rather than colour. Labels print two-colour on uncoated stock so new origins ship without new plates.",
     tags: ["Logotype", "Packaging", "Label system", "Two-colour"],
-    frames: [["Mark", "Logotype and bearing device"], ["Labels", "Origin label grid, six SKUs"], ["Bags", "Retail bag, 250g and 1kg"], ["Print", "Two-colour uncoated proofs"]]
+    frames: [
+      { label: "Mark", caption: "Logotype and bearing device", image: "" },
+      { label: "Labels", caption: "Origin label grid, six SKUs", image: "" },
+      { label: "Bags", caption: "Retail bag, 250g and 1kg", image: "" },
+      { label: "Print", caption: "Two-colour uncoated proofs", image: "" }
+    ]
   },
   {
     title: "Atlas Typeworks", tagline: "Independent type foundry", kicker: "Identity / Type", year: "2025",
     idea: "A foundry selling five families had a website that looked like a folder. The identity treats the specimen as the brand: every surface is a size chart, and the logotype is drawn from the foundry's own grotesque.",
     system: "One display cut for the wordmark, the release faces for everything else. A specimen module — size, weight, waterfall — repeats from the site to the printed catalogue.",
     tags: ["Wordmark", "Specimen", "Editorial", "Web"],
-    frames: [["Wordmark", "Drawn from the house grotesque"], ["Specimen", "Waterfall and size chart module"], ["Catalogue", "96-page printed specimen"], ["Site", "Release page and licensing table"]]
+    frames: [
+      { label: "Wordmark", caption: "Drawn from the house grotesque", image: "" },
+      { label: "Specimen", caption: "Waterfall and size chart module", image: "" },
+      { label: "Catalogue", caption: "96-page printed specimen", image: "" },
+      { label: "Site", caption: "Release page and licensing table", image: "" }
+    ]
   },
   {
     title: "Northbound", tagline: "Regional transit authority", kicker: "Wayfinding", year: "2025",
     idea: "Four bus lines, no shared vocabulary and signs added by whoever was nearest. Northbound gives the network one arrow, one type size table and a colour per corridor rather than per stop.",
     system: "A 40mm modular sign grid, three fixed type sizes and pictograms drawn on a single stroke weight. Installers work from a spec card, not a designer.",
     tags: ["Wayfinding", "Pictograms", "Sign spec", "Rollout"],
-    frames: [["Arrow", "The single directional device"], ["Signs", "Modular panel sizes"], ["Pictograms", "One-weight stroke set"], ["Rollout", "Corridor map and install order"]]
+    frames: [
+      { label: "Arrow", caption: "The single directional device", image: "" },
+      { label: "Signs", caption: "Modular panel sizes", image: "" },
+      { label: "Pictograms", caption: "One-weight stroke set", image: "" },
+      { label: "Rollout", caption: "Corridor map and install order", image: "" }
+    ]
   },
   {
     title: "Salt & Stone", tagline: "Wood-fired restaurant", kicker: "Identity / Menu", year: "2024",
     idea: "A twelve-seat kitchen where the menu changes daily. The identity is built for a printer in the back office: everything the restaurant produces is one ink on one stock.",
     system: "A stamped monogram, a single-column menu grid and a type scale that holds from a place card to a shopfront. Daily menus are set in a template the chef can fill in.",
     tags: ["Monogram", "Menu system", "One ink", "Signage"],
-    frames: [["Monogram", "Stamp and shopfront cut"], ["Menu", "Daily single-column template"], ["Table", "Place cards and coasters"], ["Front", "Painted fascia study"]]
+    frames: [
+      { label: "Monogram", caption: "Stamp and shopfront cut", image: "" },
+      { label: "Menu", caption: "Daily single-column template", image: "" },
+      { label: "Table", caption: "Place cards and coasters", image: "" },
+      { label: "Front", caption: "Painted fascia study", image: "" }
+    ]
   },
   {
     title: "Prisma", tagline: "Contemporary art festival", kicker: "Event identity", year: "2024",
     idea: "A five-day festival across eleven venues needed a system that let each venue print its own material overnight without the whole thing falling apart.",
     system: "A fixed grid with one variable: the accent rotates by day. Posters, wristbands and schedules all draw from the same eight-cell layout, so a venue only chooses content.",
     tags: ["Poster series", "Grid", "Schedule", "Merch"],
-    frames: [["Poster", "Eight-cell master layout"], ["Days", "Accent rotation, five days"], ["Schedule", "Eleven-venue programme"], ["Merch", "Wristbands and totes"]]
+    frames: [
+      { label: "Poster", caption: "Eight-cell master layout", image: "" },
+      { label: "Days", caption: "Accent rotation, five days", image: "" },
+      { label: "Schedule", caption: "Eleven-venue programme", image: "" },
+      { label: "Merch", caption: "Wristbands and totes", image: "" }
+    ]
   }
 ];
 
@@ -527,9 +571,10 @@ function blankProject() {
   return {
     title: "New project", tagline: "Tagline", kicker: "Kicker", year: String(new Date().getFullYear()),
     idea: "", system: "", tags: [],
-    frames: [["Frame 1", "Caption"]]
+    frames: [{ label: "Frame 1", caption: "Caption", image: "" }]
   };
 }
+const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
 
 class Component extends DCLogic {
   state = {
@@ -656,24 +701,44 @@ class Component extends DCLogic {
     const tags = e.target.value.split(",").map((t) => t.trim()).filter(Boolean);
     this.updateProjects((list) => list.map((p, i) => (i === idx ? { ...p, tags } : p)));
   };
-  setFrameField(part) {
+  setFrameField(key) {
     return (e) => {
       const val = e.target.value;
       const idx = this.state.openIndex;
       const fi = this.state.frame;
       this.updateProjects((list) => list.map((p, i) => {
         if (i !== idx) return p;
-        const frames = p.frames.map((f, j) => (j === fi ? (part === 0 ? [val, f[1]] : [f[0], val]) : f));
+        const frames = p.frames.map((f, j) => (j === fi ? { ...f, [key]: val } : f));
         return { ...p, frames };
       }));
     };
   }
+  setFrameImage(dataUrl) {
+    const idx = this.state.openIndex;
+    const fi = this.state.frame;
+    this.updateProjects((list) => list.map((p, i) => {
+      if (i !== idx) return p;
+      const frames = p.frames.map((f, j) => (j === fi ? { ...f, image: dataUrl } : f));
+      return { ...p, frames };
+    }));
+  }
+  onFrameImageFile = (e) => {
+    const file = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!file.type.startsWith("image/")) { window.alert("Please choose an image file."); return; }
+    if (file.size > MAX_IMAGE_BYTES) { window.alert("That image is over 3MB — pick a smaller one so it doesn't blow up local storage."); return; }
+    const reader = new FileReader();
+    reader.onload = () => this.setFrameImage(String(reader.result));
+    reader.readAsDataURL(file);
+  };
+  clearFrameImage = () => this.setFrameImage("");
   addFrame = () => {
     const idx = this.state.openIndex;
     let nextFi = 0;
     this.updateProjects((list) => list.map((p, i) => {
       if (i !== idx) return p;
-      const frames = [...p.frames, ["Frame " + (p.frames.length + 1), "Caption"]];
+      const frames = [...p.frames, { label: "Frame " + (p.frames.length + 1), caption: "Caption", image: "" }];
       nextFi = frames.length - 1;
       return { ...p, frames };
     }));
@@ -754,9 +819,11 @@ class Component extends DCLogic {
       ].join(";");
     };
 
-    const imgStyle = (idx) => [
+    const imgStyle = (idx, thumb) => [
       "position:absolute", "inset:0",
-      "background-image:repeating-linear-gradient(" + (idx % 2 ? 45 : 135) + "deg, var(--tile-a, #ded7c7) 0 10px, var(--tile-b, #d5cdba) 10px 20px)",
+      thumb
+        ? "background-image:url('" + thumb.replace(/'/g, "%27") + "');background-size:cover;background-position:center"
+        : "background-image:repeating-linear-gradient(" + (idx % 2 ? 45 : 135) + "deg, var(--tile-a, #ded7c7) 0 10px, var(--tile-b, #d5cdba) 10px 20px)",
       "filter:grayscale(0.35) contrast(1.02)",
       "transform-origin:center",
       "transition:transform 620ms cubic-bezier(.2,.7,.2,1),filter 420ms"
@@ -767,8 +834,8 @@ class Component extends DCLogic {
     return {
       projects: projects.map((d, idx) => ({
         num: pad(idx), title: d.title, kicker: d.kicker, year: d.year,
-        frameHint: d.frames.map((f) => f[0]).join(" / "),
-        tileStyle: tileStyle(idx), imgStyle: imgStyle(idx),
+        frameHint: d.frames.map((f) => f.label).join(" / "),
+        tileStyle: tileStyle(idx), imgStyle: imgStyle(idx, d.frames.find((f) => f.image)?.image),
         open: () => this.setState({ openIndex: idx, frame: 0 }),
         remove: (e) => { e.stopPropagation(); this.removeProjectAt(idx); }
       })),
@@ -812,18 +879,26 @@ class Component extends DCLogic {
       active: isOpen ? {
         num: pad(i), title: p.title, tagline: p.tagline, kicker: p.kicker, year: p.year,
         idea: p.idea, system: p.system, tags: p.tags, tagsText: p.tags.join(", "),
-        frameLabel: p.frames[fi][0], frameCaption: p.frames[fi][1],
+        frameLabel: p.frames[fi].label, frameCaption: p.frames[fi].caption,
+        frameImage: p.frames[fi].image, hasFrameImage: !!p.frames[fi].image,
+        imageButtonLabel: p.frames[fi].image ? "Change image" : "+ Add image",
+        frameBoxStyle: [
+          "position:relative", "flex:1", "overflow:hidden",
+          "border:1px solid rgba(233,227,215,0.26)",
+          p.frames[fi].image ? "background:#1f1d1a" : "background-image:repeating-linear-gradient(135deg, #302d28 0 9px, #383430 9px 18px)"
+        ].join(";"),
         nextLabel: projects[(i + 1) % projects.length].title,
         setTitle: this.setActiveField("title"), setTagline: this.setActiveField("tagline"),
         setKicker: this.setActiveField("kicker"), setYear: this.setActiveField("year"),
         setIdea: this.setActiveField("idea"), setSystem: this.setActiveField("system"),
         setTags: this.setActiveTags,
-        setFrameLabel: this.setFrameField(0), setFrameCaption: this.setFrameField(1),
+        setFrameLabel: this.setFrameField("label"), setFrameCaption: this.setFrameField("caption"),
+        onFrameImageFile: this.onFrameImageFile, clearFrameImage: this.clearFrameImage,
         addFrame: this.addFrame, removeFrame: this.removeFrame, canRemoveFrame: p.frames.length > 1,
         remove: () => this.removeProjectAt(i)
       } : {},
       frameTabs: isOpen ? p.frames.map((f, idx) => ({
-        num: pad(idx), label: f[0], style: tab(idx === fi, true),
+        num: pad(idx), label: f.label, style: tab(idx === fi, true),
         select: () => this.setState({ frame: idx })
       })) : [],
       close: () => this.setState({ openIndex: null }),
