@@ -20,6 +20,7 @@
   @keyframes overlayIn { from { opacity: 0; transform: translateY(1.5%); } to { opacity: 1; transform: none; } }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+  @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
   ::selection { background: rgba(79, 185, 175, 0.35); }
   :focus-visible { outline: 2px solid var(--acc, #4fb9af); outline-offset: 3px; }
   .rail-link:hover { color: var(--acc-deep, #2f7d76); }
@@ -31,7 +32,47 @@
 </style>
 </helmet>
 
-<div style="background: var(--ground, #e9e3d7); color: #1f1d1a; font-family: 'Poppins', system-ui, sans-serif; display: grid; grid-template-columns: 312px minmax(0, 1fr); min-height: 100vh;">
+<section id="top" data-screen-label="Hero" style="position: relative; height: 100vh; min-height: 620px; display: flex; flex-direction: column; justify-content: space-between; padding: 40px 48px 32px; overflow: hidden; background: var(--ground, #e9e3d7); color: #1f1d1a; font-family: 'Poppins', system-ui, sans-serif;">
+  <div style="position: absolute; top: -12%; left: 50%; width: 26px; height: 132%; background: var(--acc, #4fb9af); opacity: 0.85; transform: translateX(-50%) rotate(14deg); z-index: 0;"></div>
+
+  <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 9px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; color: #4a463f;">
+      <span style="width: 7px; height: 7px; background: var(--acc-deep, #2f7d76); animation: pulseDot 2.6s ease-in-out infinite;"></span>
+      <span>Open for 2026</span>
+    </div>
+    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.08em;">CARL JUDE UTRERA</div>
+  </div>
+
+  <div style="position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: riseIn 700ms cubic-bezier(.2,.7,.2,1) both;">
+    <h2 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: clamp(64px, 14vw, 240px); line-height: 0.8; letter-spacing: 0.01em;">
+      IDEAS<br><span style="color: var(--acc-deep, #2f7d76);">IN</span><br>ACTION
+    </h2>
+    <p style="margin: 22px 0 0; max-width: 44ch; font-size: 15px; line-height: 1.62; font-weight: 300; color: #3a3730; text-wrap: pretty;">Marks, grids and type scales that survive the handover — every project ships with a written specification, not a mood board.</p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; justify-content: center;">
+      <a href="#work" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; background: #1f1d1a; color: var(--ground, #e9e3d7); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">See the work →</a>
+      <a href="#cv" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">Résumé</a>
+    </div>
+  </div>
+
+  <div style="position: relative; z-index: 1;">
+    <div style="overflow: hidden; border-top: 1px solid rgba(31, 29, 26, 0.22); border-bottom: 1px solid rgba(31, 29, 26, 0.22);">
+      <div style="display: flex; width: max-content; animation: ticker 34s linear infinite; animation-play-state: var(--ticker-play, running);">
+        <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
+          <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
+        </div>
+        <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
+          <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
+        </div>
+      </div>
+    </div>
+    <button onClick="{{ scrollToContent }}" style="cursor: pointer; display: flex; align-items: center; gap: 8px; margin: 16px auto 0; background: transparent; border: 0; color: #4a463f; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;">
+      Scroll to explore
+      <span style="display: inline-block; animation: bounceDown 1.6s ease-in-out infinite;">↓</span>
+    </button>
+  </div>
+</section>
+
+<div id="content" style="background: var(--ground, #e9e3d7); color: #1f1d1a; font-family: 'Poppins', system-ui, sans-serif; display: grid; grid-template-columns: 312px minmax(0, 1fr); min-height: 100vh;">
 
   <aside style="position: sticky; top: 0; align-self: start; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 34px 28px 30px; border-right: 1px solid rgba(31, 29, 26, 0.22); background: var(--ground-2, #e3dccd);">
     <div>
@@ -128,33 +169,7 @@
 
   <main style="min-width: 0;">
 
-    <section id="top" data-screen-label="Hero" style="padding: 78px 48px 0; border-bottom: 1px solid rgba(31, 29, 26, 0.22);">
-      <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px; animation: riseIn 700ms cubic-bezier(.2,.7,.2,1) both;">
-        <h2 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: clamp(56px, 9.4vw, 168px); line-height: 0.83; letter-spacing: 0.005em;">
-          Identity<br>systems<br>with a<br><span style="color: var(--acc-deep, #2f7d76);">spine.</span>
-        </h2>
-        <div style="max-width: 34ch; padding-bottom: 14px;">
-          <p style="margin: 0 0 18px; font-size: 15px; line-height: 1.62; font-weight: 300; color: #3a3730; text-wrap: pretty;">Marks, grids and type scales that survive the handover — every project ships with a written specification, not a mood board.</p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="#work" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; background: #1f1d1a; color: var(--ground, #e9e3d7); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">See the work →</a>
-            <a href="#cv" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">Résumé</a>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top: 54px; overflow: hidden; border-top: 1px solid rgba(31, 29, 26, 0.22); border-bottom: 1px solid rgba(31, 29, 26, 0.22);">
-        <div style="display: flex; width: max-content; animation: ticker 34s linear infinite; animation-play-state: var(--ticker-play, running);">
-          <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
-            <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
-          </div>
-          <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
-            <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="work" data-screen-label="Selected work" style="padding: 46px 48px 0;">
+    <section id="work" data-screen-label="Selected work" style="padding: 78px 48px 0;">
       <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
         <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: 30px; letter-spacing: 0.1em;">Selected work</h3>
         <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">{{ projectCount }} case studies — click to open</span>
@@ -704,6 +719,7 @@ class Component extends DCLogic {
     lsSave("isAdmin", false);
   };
   toggleEditMode = () => this.setState((s) => ({ editMode: !s.editMode }));
+  scrollToContent = () => document.getElementById("content")?.scrollIntoView({ behavior: "smooth" });
   openExport = () => this.setState({ showExport: true });
   closeExport = () => this.setState({ showExport: false });
   resetToDefaults = () => {
@@ -1019,6 +1035,7 @@ class Component extends DCLogic {
       close: () => this.setState({ openIndex: null }),
       nextProject: () => this.shiftProject(1),
       prevProject: () => this.shiftProject(-1),
+      scrollToContent: this.scrollToContent,
       isAdmin: this.state.isAdmin,
       unlockAdmin: this.unlockAdmin,
       lockAdmin: this.lockAdmin,
