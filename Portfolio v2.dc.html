@@ -924,15 +924,19 @@ class Component extends DCLogic {
       ].join(";");
     };
 
-    const imgStyle = (idx, thumb) => [
-      "position:absolute", "inset:0",
-      thumb
-        ? "background-image:url('" + thumb.replace(/'/g, "%27") + "');background-size:cover;background-position:center"
-        : "background-image:repeating-linear-gradient(" + (idx % 2 ? 45 : 135) + "deg, var(--tile-a, #ded7c7) 0 10px, var(--tile-b, #d5cdba) 10px 20px)",
-      "filter:grayscale(0.35) contrast(1.02)",
-      "transform-origin:center",
-      "transition:transform 620ms cubic-bezier(.2,.7,.2,1),filter 420ms"
-    ].join(";");
+    // Returns a style OBJECT, not a string — a joined string gets re-split on ";" by the
+    // template runtime, which corrupts data: URIs (they contain their own ";base64," part).
+    const imgStyle = (idx, thumb) => ({
+      position: "absolute", inset: 0,
+      backgroundImage: thumb
+        ? "url('" + thumb.replace(/'/g, "%27") + "')"
+        : "repeating-linear-gradient(" + (idx % 2 ? 45 : 135) + "deg, var(--tile-a, #ded7c7) 0 10px, var(--tile-b, #d5cdba) 10px 20px)",
+      backgroundSize: thumb ? "cover" : undefined,
+      backgroundPosition: thumb ? "center" : undefined,
+      filter: "grayscale(0.35) contrast(1.02)",
+      transformOrigin: "center",
+      transition: "transform 620ms cubic-bezier(.2,.7,.2,1),filter 420ms"
+    });
 
     const cvGroup = this.state.cv[this.state.cvTab];
 
