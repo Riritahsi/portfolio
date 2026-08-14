@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&display=swap">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231f1d1a'/%3E%3Crect x='25' y='9' width='14' height='46' fill='%23e9e3d7'/%3E%3Crect x='25' y='9' width='14' height='16' fill='%234fb9af'/%3E%3C/svg%3E">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--ground, #e9e3d7); }
+  body { -webkit-font-smoothing: antialiased; }
+  a { color: var(--acc-deep, #2f7d76); text-decoration: none; }
+  a:hover { color: #1f1d1a; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes overlayIn { from { opacity: 0; transform: translateY(1.5%); } to { opacity: 1; transform: none; } }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+  ::selection { background: rgba(79, 185, 175, 0.35); }
+  :focus-visible { outline: 2px solid var(--acc, #4fb9af); outline-offset: 3px; }
+  .rail-link:hover { color: var(--acc-deep, #2f7d76); }
+  .rail-link:hover .rail-bar { transform: scaleX(1); }
+  .tile:hover .tile-img { transform: scale(1.03); filter: grayscale(0.2) contrast(1.05); }
+  .tile:hover .tile-title { color: var(--acc-deep, #2f7d76); }
+  .tile:hover .tile-open { opacity: 1; transform: translate(0, 0); }
+  .tile:hover .tile-frame { border-color: var(--acc, #4fb9af); }
+</style>
+</helmet>
+
+<div style="background: var(--ground, #e9e3d7); color: #1f1d1a; font-family: 'Poppins', system-ui, sans-serif; display: grid; grid-template-columns: 312px minmax(0, 1fr); min-height: 100vh;">
+
+  <aside style="position: sticky; top: 0; align-self: start; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding: 34px 28px 30px; border-right: 1px solid rgba(31, 29, 26, 0.22); background: var(--ground-2, #e3dccd);">
+    <div>
+      <div style="display: flex; align-items: center; gap: 9px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; color: #4a463f;">
+        <span style="width: 7px; height: 7px; background: var(--acc, #4fb9af); animation: pulseDot 2.6s ease-in-out infinite;"></span>
+        <span>Open for 2026</span>
+      </div>
+      <h1 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 26px 0 0; font-size: 68px; line-height: 0.82; letter-spacing: 0.005em;">
+        Carl<br>Jude<br><span style="color: var(--acc-deep, #2f7d76);">Utrera</span>
+      </h1>
+      <div style="margin-top: 16px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #4a463f;">Graphic Design</div>
+      <div style="margin-top: 4px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #4a463f;">Brand Identity — Manila</div>
+    </div>
+
+    <nav style="display: grid; gap: 2px; margin: 32px 0;">
+      <a class="rail-link" href="#work" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
+        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">01</span>
+        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Work</span>
+        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+      </a>
+      <a class="rail-link" href="#about" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
+        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">02</span>
+        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">About</span>
+        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+      </a>
+      <a class="rail-link" href="#cv" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
+        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">03</span>
+        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Résumé</span>
+        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+      </a>
+      <a class="rail-link" href="#contact" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); border-bottom: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
+        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">04</span>
+        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Contact</span>
+        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+      </a>
+    </nav>
+
+    <div>
+      <div style="height: 2px; background: rgba(31, 29, 26, 0.14); margin-bottom: 14px;">
+        <div ref="{{ progressRef }}" style="height: 2px; width: 0%; background: var(--acc, #4fb9af);"></div>
+      </div>
+      <a href="mailto:hello@carljude.design" style="font-size: 12px; letter-spacing: 0.04em; color: #1f1d1a;">hello@carljude.design</a>
+      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8579; margin-top: 6px;">© 2026 — Portfolio 01</div>
+
+      <sc-if value="{{ !isAdmin }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ unlockAdmin }}" style="cursor: pointer; margin-top: 14px; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 0;">Site admin</button>
+      </sc-if>
+      <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top: 14px; display: grid; gap: 6px;">
+          <button onClick="{{ toggleEditMode }}" style="{{ editModeButtonStyle }}">{{ editModeLabel }}</button>
+          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ openExport }}" style="cursor: pointer; text-align: left; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">Export code →</button>
+            <button onClick="{{ resetToDefaults }}" style="cursor: pointer; text-align: left; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #7a2f2f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">Reset to file defaults</button>
+          </sc-if>
+          <button onClick="{{ lockAdmin }}" style="cursor: pointer; text-align: left; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0; margin-top: 2px;">Log out</button>
+        </div>
+      </sc-if>
+    </div>
+  </aside>
+
+  <sc-if value="{{ showExport }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 200; background: rgba(20, 18, 15, 0.72); display: flex; align-items: center; justify-content: center; padding: 40px;">
+      <div style="background: var(--ground, #e9e3d7); color: #1f1d1a; width: min(720px, 100%); max-height: 84vh; display: flex; flex-direction: column; border: 1px solid rgba(31,29,26,0.3);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(31,29,26,0.25);">
+          <div style="font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.06em;">Export content code</div>
+          <button onClick="{{ closeExport }}" style="cursor: pointer; background: #1f1d1a; border: 0; color: var(--ground, #e9e3d7); padding: 8px 12px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">Close ✕</button>
+        </div>
+        <p style="margin: 14px 20px 0; font-size: 12px; line-height: 1.6; color: #4a463f;">Copy this and hand it to Claude Code (or paste it in yourself) to replace the <code>DATA</code>, <code>SERVICES</code>, <code>CV</code> and <code>RESUME</code> blocks near the bottom of the script tag — that makes your edits permanent for every visitor, not just this browser.</p>
+        <textarea readOnly value="{{ exportText }}" style="flex: 1; margin: 14px 20px 20px; font-family: ui-monospace, monospace; font-size: 11.5px; line-height: 1.5; padding: 14px; border: 1px solid rgba(31,29,26,0.3); background: #fff; color: #1f1d1a; resize: none;"></textarea>
+      </div>
+    </div>
+  </sc-if>
+
+  <main style="min-width: 0;">
+
+    <section id="top" data-screen-label="Hero" style="padding: 78px 48px 0; border-bottom: 1px solid rgba(31, 29, 26, 0.22);">
+      <div style="display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px; animation: riseIn 700ms cubic-bezier(.2,.7,.2,1) both;">
+        <h2 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: clamp(56px, 9.4vw, 168px); line-height: 0.83; letter-spacing: 0.005em;">
+          Identity<br>systems<br>with a<br><span style="color: var(--acc-deep, #2f7d76);">spine.</span>
+        </h2>
+        <div style="max-width: 34ch; padding-bottom: 14px;">
+          <p style="margin: 0 0 18px; font-size: 15px; line-height: 1.62; font-weight: 300; color: #3a3730; text-wrap: pretty;">Marks, grids and type scales that survive the handover — every project ships with a written specification, not a mood board.</p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="#work" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; background: #1f1d1a; color: var(--ground, #e9e3d7); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">See the work →</a>
+            <a href="#cv" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">Résumé</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 54px; overflow: hidden; border-top: 1px solid rgba(31, 29, 26, 0.22); border-bottom: 1px solid rgba(31, 29, 26, 0.22);">
+        <div style="display: flex; width: max-content; animation: ticker 34s linear infinite; animation-play-state: var(--ticker-play, running);">
+          <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
+            <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
+          </div>
+          <div style="display: flex; gap: 40px; padding: 13px 20px 13px 0; font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 0.16em; color: #4a463f;">
+            <span>Brand identity</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Packaging</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Editorial</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Wayfinding</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Lettering</span><span style="color: var(--acc, #4fb9af);">◆</span><span>Art direction</span><span style="color: var(--acc, #4fb9af);">◆</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" data-screen-label="Selected work" style="padding: 46px 48px 0;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: 30px; letter-spacing: 0.1em;">Selected work</h3>
+        <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">{{ projectCount }} case studies — click to open</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; margin-top: 24px; padding-bottom: 12px;">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+          <div class="tile" onClick="{{ p.open }}" style="{{ p.tileStyle }}">
+            <div class="tile-frame" style="position: relative; overflow: hidden; border: 1px solid rgba(31, 29, 26, 0.25); transition: border-color 260ms; height: 100%; min-height: 0;">
+              <div class="tile-img" style="{{ p.imgStyle }}"></div>
+              <div style="position: absolute; top: 12px; left: 14px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.16em; color: #3a3730;">{{ p.num }}</div>
+              <div style="position: absolute; bottom: 12px; left: 14px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #6b6659;">{{ p.frameHint }}</div>
+              <div class="tile-open" style="position: absolute; bottom: 0; right: 0; opacity: 0; transform: translate(6px, 6px); transition: all 300ms cubic-bezier(.2,.7,.2,1); background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); padding: 8px 13px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.16em;">Open →</div>
+              <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+                <button onClick="{{ p.remove }}" style="position: absolute; top: 8px; right: 10px; cursor: pointer; background: #7a2f2f; border: 0; color: #f3ece3; width: 22px; height: 22px; line-height: 1; font-size: 13px;">×</button>
+              </sc-if>
+            </div>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding-top: 11px; min-width: 0;">
+              <span class="tile-title" style="flex: 0 1 auto; min-width: 0; font-family: 'Bebas Neue', sans-serif; font-size: clamp(22px, 2.4vw, 40px); line-height: 1; letter-spacing: 0.03em; transition: color 220ms;">{{ p.title }}</span>
+              <span style="flex: 0 1 auto; min-width: 0; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8579; text-align: right; text-wrap: balance;">{{ p.kicker }} / {{ p.year }}</span>
+            </div>
+          </div>
+        </sc-for>
+        <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+          <div class="tile" onClick="{{ addProject }}" style="grid-column: span 4; height: 220px; cursor: pointer;">
+            <div style="height: 100%; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--acc-deep, #2f7d76); font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.1em; color: var(--acc-deep, #2f7d76);">+ Add project</div>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section id="about" data-screen-label="About" style="padding: 46px 48px 0; border-top: 1px solid rgba(31, 29, 26, 0.22); margin-top: 34px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 34px;">
+        <div>
+          <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0 0 22px; font-size: 30px; letter-spacing: 0.1em;">About</h3>
+          <p style="margin: 0 0 22px; font-size: clamp(20px, 2.1vw, 30px); line-height: 1.24; font-weight: 400; max-width: 28ch; text-wrap: pretty;">I work from the constraints out — how it prints, how it stacks on a shelf, how it survives a junior designer six months from now.</p>
+          <p style="margin: 0 0 14px; font-size: 15px; line-height: 1.65; font-weight: 300; color: #3a3730; max-width: 52ch;">Seven years across studio and in-house work, mostly for food, culture and small manufacturers. Independent since 2022.</p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; border-top: 1px solid rgba(31, 29, 26, 0.22); padding-top: 18px;">
+            <div>
+              <div style="font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 1; color: var(--acc-deep, #2f7d76);">07</div>
+              <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6659; margin-top: 4px;">Years</div>
+            </div>
+            <div>
+              <div style="font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 1; color: var(--acc-deep, #2f7d76);">38</div>
+              <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6659; margin-top: 4px;">Identities</div>
+            </div>
+            <div>
+              <div style="font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 1; color: var(--acc-deep, #2f7d76);">11</div>
+              <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6b6659; margin-top: 4px;">Awards</div>
+            </div>
+          </div>
+        </div>
+        <div style="background: var(--ground-2, #e3dccd); padding: 26px 24px 28px; align-self: start;">
+          <div style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acc-deep, #2f7d76);">Services</div>
+          <div style="margin-top: 14px;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+              <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(31, 29, 26, 0.18);">
+                <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+                  <input value="{{ s.name }}" oninput="{{ s.setName }}" placeholder="Service" style="flex: 1; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.05em; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 4px; color: #1f1d1a;">
+                  <input value="{{ s.note }}" oninput="{{ s.setNote }}" placeholder="Note" style="width: 110px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6659; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 4px;">
+                  <button onClick="{{ s.remove }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(31,29,26,0.4); color: #7a2f2f; padding: 4px 8px; font-size: 10px;">×</button>
+                </sc-if>
+                <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+                  <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">{{ s.name }}</span>
+                  <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6659;">{{ s.note }}</span>
+                </sc-if>
+              </div>
+            </sc-for>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ addService }}" style="cursor: pointer; margin-top: 10px; background: transparent; border: 1px dashed var(--acc-deep, #2f7d76); color: var(--acc-deep, #2f7d76); padding: 8px 12px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em; width: 100%;">+ Add service</button>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px;">
+            <span style="border: 1px solid rgba(31, 29, 26, 0.3); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">Illustrator</span>
+            <span style="border: 1px solid rgba(31, 29, 26, 0.3); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">InDesign</span>
+            <span style="border: 1px solid rgba(31, 29, 26, 0.3); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">Glyphs</span>
+            <span style="border: 1px solid rgba(31, 29, 26, 0.3); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">Figma</span>
+            <span style="background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">Letterpress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" data-screen-label="Résumé" style="padding: 46px 48px 0; margin-top: 46px; border-top: 1px solid rgba(31, 29, 26, 0.22);">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding-top: 34px;">
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: 30px; letter-spacing: 0.1em;">Résumé</h3>
+        <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">Record {{ cvRecordNum }} / 03</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; margin-top: 20px; border: 1px solid rgba(31, 29, 26, 0.25);">
+        <div style="display: flex; flex-direction: column; min-width: 0; border-right: 1px solid rgba(31, 29, 26, 0.25);">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 15px 24px; border-bottom: 1px solid rgba(31, 29, 26, 0.25); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;">
+            <span style="color: #6b6659;">{{ cvActive.heading }}</span>
+            <span style="color: var(--acc-deep, #2f7d76);">{{ cvActive.count }} entries</span>
+          </div>
+          <div style="flex: 1; padding: 22px 24px 26px;">
+            <sc-for list="{{ cvActive.items }}" as="i" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: 104px 1fr; gap: 20px; align-items: start; padding: 17px 0; border-bottom: 1px solid rgba(31, 29, 26, 0.14);">
+                <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+                  <input value="{{ i.years }}" oninput="{{ i.setYears }}" placeholder="Years" style="width: 100%; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6659; padding-top: 5px; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 4px;">
+                </sc-if>
+                <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8579; padding-top: 5px;">{{ i.years }}</div>
+                </sc-if>
+                <div>
+                  <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+                    <input value="{{ i.title }}" oninput="{{ i.setTitle }}" placeholder="Title" style="width: 100%; font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 4px; margin-bottom: 4px; color: #1f1d1a;">
+                    <textarea value="{{ i.detail }}" oninput="{{ i.setDetail }}" rows="2" placeholder="Detail" style="width: 100%; font-size: 13px; font-weight: 300; color: #3a3730; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 4px; resize: vertical;"></textarea>
+                    <button onClick="{{ i.remove }}" style="cursor: pointer; margin-top: 6px; background: transparent; border: 1px solid rgba(31,29,26,0.4); color: #7a2f2f; padding: 4px 9px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">Remove ×</button>
+                  </sc-if>
+                  <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+                    <div style="font-family: 'Bebas Neue', sans-serif; font-size: 26px; line-height: 1.05; letter-spacing: 0.04em;">{{ i.title }}</div>
+                    <div style="font-size: 14px; font-weight: 300; margin-top: 4px; color: #3a3730; text-wrap: pretty;">{{ i.detail }}</div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ cvActive.addItem }}" style="cursor: pointer; margin-top: 14px; background: transparent; border: 1px dashed var(--acc-deep, #2f7d76); color: var(--acc-deep, #2f7d76); padding: 9px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.12em; width: 100%;">+ Add entry</button>
+            </sc-if>
+          </div>
+          <div style="display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 1px solid rgba(31, 29, 26, 0.25);">
+            <sc-for list="{{ cvTabs }}" as="t" hint-placeholder-count="3">
+              <button onClick="{{ t.select }}" style="{{ t.style }}">
+                <span style="opacity: 0.55; font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: 0.14em;">{{ t.num }}</span>
+                <span>{{ t.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background: var(--ground-2, #e3dccd); padding: 24px 24px 28px;">
+          <div style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acc-deep, #2f7d76);">Practice summary</div>
+          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+            <textarea value="{{ resume.headline }}" oninput="{{ resume.setHeadline }}" rows="3" style="width: 100%; margin: 12px 0 18px; font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1.02; letter-spacing: 0.03em; background: transparent; border: 1px dashed var(--acc-deep, #2f7d76); padding: 6px; resize: vertical; color: #1f1d1a;"></textarea>
+          </sc-if>
+          <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1.02; letter-spacing: 0.03em; margin: 12px 0 18px; text-wrap: balance;">{{ resume.headline }}</div>
+          </sc-if>
+          <div style="display: grid; grid-template-columns: 74px 1fr; gap: 16px; align-items: start; border-top: 1px solid rgba(31, 29, 26, 0.2); padding-top: 14px;">
+            <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8579;">Focus</div>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ resume.focus }}" oninput="{{ resume.setFocus }}" rows="2" style="width: 100%; margin: 0; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.6; background: transparent; border: 1px dashed var(--acc-deep, #2f7d76); padding: 6px; resize: vertical; color: #1f1d1a;"></textarea>
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #3a3730;">{{ resume.focus }}</p>
+            </sc-if>
+          </div>
+          <div style="display: grid; grid-template-columns: 74px 1fr; gap: 16px; align-items: start; border-top: 1px solid rgba(31, 29, 26, 0.2); padding-top: 14px; margin-top: 14px;">
+            <div style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8579;">Based</div>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ resume.based }}" oninput="{{ resume.setBased }}" rows="2" style="width: 100%; margin: 0; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.6; background: transparent; border: 1px dashed var(--acc-deep, #2f7d76); padding: 6px; resize: vertical; color: #1f1d1a;"></textarea>
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.6; color: #3a3730;">{{ resume.based }}</p>
+            </sc-if>
+          </div>
+          <a href="./uploads/Carl Jude Utrera - CV.pdf" download="Carl Jude Utrera - CV.pdf" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 26px; padding: 13px 16px; background: #1f1d1a; color: var(--ground, #e9e3d7); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">
+            <span>Download the full PDF</span><span>↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" data-screen-label="Contact" style="margin-top: 56px; background: var(--acc-deep, #2f7d76); color: var(--ground, #e9e3d7); padding: 54px 48px 32px;">
+      <div style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid rgba(233, 227, 215, 0.4); padding-bottom: 12px; color: #cfe8e5;">Contact</div>
+      <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 26px 0 34px; font-size: clamp(46px, 8.4vw, 132px); line-height: 0.86; letter-spacing: 0.01em;">Have a brand<br>that needs<br>a spine?</h3>
+      <div style="display: grid; grid-template-columns: 1.4fr repeat(3, auto); gap: 18px; align-items: baseline; border-top: 1px solid rgba(233, 227, 215, 0.4); padding-top: 16px; font-size: 13px;">
+        <a href="mailto:hello@carljude.design" style="font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.06em; color: var(--ground, #e9e3d7);">hello@carljude.design</a>
+        <a href="#top" style="color: #cfe8e5; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px;">Instagram</a>
+        <a href="#top" style="color: #cfe8e5; letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px;">Behance</a>
+        <span style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #cfe8e5;">© 2026</span>
+      </div>
+    </section>
+  </main>
+
+  <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; background: #1f1d1a; color: var(--ground, #e9e3d7); display: grid; grid-template-columns: 1.4fr 1fr; animation: overlayIn 380ms cubic-bezier(.2,.7,.2,1) both;">
+      <div style="display: flex; flex-direction: column; min-width: 0; border-right: 1px solid rgba(233, 227, 215, 0.24);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 26px; border-bottom: 1px solid rgba(233, 227, 215, 0.24); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;">
+          <span>Case study {{ active.num }} / {{ projectCount }}</span>
+          <span style="color: var(--acc, #4fb9af);">{{ active.kicker }}</span>
+        </div>
+        <div style="flex: 1; min-height: 0; padding: 34px; display: flex;">
+          <div style="position: relative; flex: 1; border: 1px solid rgba(233, 227, 215, 0.26); background-image: repeating-linear-gradient(135deg, #302d28 0 9px, #383430 9px 18px);">
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; inset: 24px; display: flex; align-items: center; justify-content: center;">
+                <textarea value="{{ active.frameCaption }}" oninput="{{ active.setFrameCaption }}" rows="3" placeholder="Frame caption" style="width: 100%; background: rgba(0,0,0,0.35); border: 1px dashed var(--acc, #4fb9af); color: #e9e3d7; text-align: center; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px; resize: vertical;"></textarea>
+              </div>
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #9c968a;">{{ active.frameCaption }}</div>
+            </sc-if>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <input value="{{ active.frameLabel }}" oninput="{{ active.setFrameLabel }}" style="position: absolute; right: 0; bottom: 0; width: 130px; text-align: right; background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); border: 0; padding: 8px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.16em;">
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <div style="position: absolute; right: 0; bottom: 0; background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); padding: 8px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.16em;">{{ active.frameLabel }}</div>
+            </sc-if>
+          </div>
+        </div>
+        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 1px solid rgba(233, 227, 215, 0.24);">
+          <sc-for list="{{ frameTabs }}" as="t" hint-placeholder-count="4">
+            <button onClick="{{ t.select }}" style="{{ t.style }}">
+              <span style="opacity: 0.55; font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: 0.14em;">{{ t.num }}</span>
+              <span>{{ t.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; gap: 10px; padding: 12px 20px; border-top: 1px solid rgba(233, 227, 215, 0.24);">
+            <button onClick="{{ active.addFrame }}" style="cursor: pointer; flex: 1; background: transparent; border: 1px dashed var(--acc, #4fb9af); color: var(--acc, #4fb9af); padding: 9px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">+ Add frame</button>
+            <sc-if value="{{ active.canRemoveFrame }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ active.removeFrame }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(233,227,215,0.4); color: #e9c3c3; padding: 9px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.12em;">Remove frame</button>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="background: var(--ground, #e9e3d7); color: #1f1d1a; overflow-y: auto;">
+        <div style="display: flex; align-items: center; justify-content: flex-end; padding: 11px 14px; border-bottom: 1px solid rgba(31, 29, 26, 0.25);">
+          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ active.remove }}" style="margin-right: auto; cursor: pointer; border: 1px solid rgba(31,29,26,0.4); background: transparent; color: #7a2f2f; padding: 9px 14px; font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 0.14em;">Delete project</button>
+          </sc-if>
+          <button onClick="{{ close }}" style="display: inline-flex; align-items: center; gap: 12px; cursor: pointer; border: 0; background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); padding: 10px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.16em;">Close ✕</button>
+        </div>
+        <div style="padding: 34px 34px 56px;">
+          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+            <input value="{{ active.tagline }}" oninput="{{ active.setTagline }}" placeholder="Tagline" style="width: 100%; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc-deep, #2f7d76); background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 5px;">
+            <input value="{{ active.title }}" oninput="{{ active.setTitle }}" placeholder="Title" style="width: 100%; font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 0.01em; margin: 10px 0 6px; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 5px; color: #1f1d1a;">
+            <div style="display: flex; gap: 8px;">
+              <input value="{{ active.kicker }}" oninput="{{ active.setKicker }}" placeholder="Kicker" style="flex: 1; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6659; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 5px;">
+              <input value="{{ active.year }}" oninput="{{ active.setYear }}" placeholder="Year" style="width: 90px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #6b6659; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 5px;">
+            </div>
+          </sc-if>
+          <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--acc-deep, #2f7d76);">{{ active.tagline }}</div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 6vw, 84px); line-height: 0.9; letter-spacing: 0.01em; margin: 10px 0 6px;">{{ active.title }}</div>
+            <div style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">{{ active.kicker }} — {{ active.year }}</div>
+          </sc-if>
+          <div style="height: 1px; background: rgba(31, 29, 26, 0.25); margin: 24px 0;"></div>
+          <div style="display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start;">
+            <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8579; padding-top: 3px;">The idea</div>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ active.idea }}" oninput="{{ active.setIdea }}" rows="4" style="width: 100%; font-size: 14px; font-weight: 300; line-height: 1.55; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 6px; resize: vertical; color: #1f1d1a;"></textarea>
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.66; text-wrap: pretty;">{{ active.idea }}</p>
+            </sc-if>
+          </div>
+          <div style="height: 1px; background: rgba(31, 29, 26, 0.25); margin: 22px 0;"></div>
+          <div style="display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start;">
+            <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8579; padding-top: 3px;">The system</div>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <textarea value="{{ active.system }}" oninput="{{ active.setSystem }}" rows="4" style="width: 100%; font-size: 14px; font-weight: 300; line-height: 1.55; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 6px; resize: vertical; color: #1f1d1a;"></textarea>
+            </sc-if>
+            <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+              <p style="margin: 0; font-size: 15px; font-weight: 300; line-height: 1.66; text-wrap: pretty;">{{ active.system }}</p>
+            </sc-if>
+          </div>
+          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 20px;">
+              <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8579; margin-bottom: 6px;">Tags (comma-separated)</div>
+              <input value="{{ active.tagsText }}" oninput="{{ active.setTags }}" style="width: 100%; font-size: 13px; background: transparent; border: 1px dashed rgba(31,29,26,0.35); padding: 6px; color: #1f1d1a;">
+            </div>
+          </sc-if>
+          <sc-if value="{{ !editMode }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px;">
+              <sc-for list="{{ active.tags }}" as="tg" hint-placeholder-count="4">
+                <span style="border: 1px solid rgba(31, 29, 26, 0.3); padding: 5px 10px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;">{{ tg }}</span>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="height: 1px; background: rgba(31, 29, 26, 0.25); margin: 30px 0 18px;"></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px;">
+            <button onClick="{{ prevProject }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; padding: 10px 15px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.14em;">← Previous</button>
+            <span style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #8a8579;">Next: {{ active.nextLabel }}</span>
+            <button onClick="{{ nextProject }}" style="cursor: pointer; background: #1f1d1a; border: 0; color: var(--ground, #e9e3d7); padding: 11px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.14em;">Next case →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;accentTone&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;var(--acc, #4fb9af)&quot;,&quot;options&quot;:[&quot;var(--acc, #4fb9af)&quot;,&quot;var(--acc-deep, #2f7d76)&quot;,&quot;#b98a4f&quot;,&quot;#6f7f9c&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;groundTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;beige&quot;,&quot;options&quot;:[&quot;beige&quot;,&quot;warm-grey&quot;,&quot;sand&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;tickerMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+const DATA = [
+  {
+    title: "Test 1", tagline: "This is a super test", kicker: "Identity", year: "2026",
+    idea: "Placeholder case study standing in for your first project — swap this copy for the real brief and the structure holds.",
+    system: "A mark, a two-weight lockup, one accent and a grid specification that carries across print and screen.",
+    tags: ["Logotype", "Grid", "Print", "Guidelines"],
+    frames: [["Mark", "Primary mark, clear space and minimum size"], ["Palette", "Ink, ground and the single accent"], ["Application", "Stationery and signage tests"], ["Spec", "Grid and type specification sheet"]]
+  },
+  {
+    title: "Meridian", tagline: "Specialty roaster, Manila", kicker: "Identity / Packaging", year: "2026",
+    idea: "Meridian roasts single origins in small batches and needed shelf presence without a mascot. The identity is a compass bearing set as type — each origin gets its own degree mark, so the range reads as one family at a glance.",
+    system: "A monolinear logotype, a four-column label grid and origin coding by number rather than colour. Labels print two-colour on uncoated stock so new origins ship without new plates.",
+    tags: ["Logotype", "Packaging", "Label system", "Two-colour"],
+    frames: [["Mark", "Logotype and bearing device"], ["Labels", "Origin label grid, six SKUs"], ["Bags", "Retail bag, 250g and 1kg"], ["Print", "Two-colour uncoated proofs"]]
+  },
+  {
+    title: "Atlas Typeworks", tagline: "Independent type foundry", kicker: "Identity / Type", year: "2025",
+    idea: "A foundry selling five families had a website that looked like a folder. The identity treats the specimen as the brand: every surface is a size chart, and the logotype is drawn from the foundry's own grotesque.",
+    system: "One display cut for the wordmark, the release faces for everything else. A specimen module — size, weight, waterfall — repeats from the site to the printed catalogue.",
+    tags: ["Wordmark", "Specimen", "Editorial", "Web"],
+    frames: [["Wordmark", "Drawn from the house grotesque"], ["Specimen", "Waterfall and size chart module"], ["Catalogue", "96-page printed specimen"], ["Site", "Release page and licensing table"]]
+  },
+  {
+    title: "Northbound", tagline: "Regional transit authority", kicker: "Wayfinding", year: "2025",
+    idea: "Four bus lines, no shared vocabulary and signs added by whoever was nearest. Northbound gives the network one arrow, one type size table and a colour per corridor rather than per stop.",
+    system: "A 40mm modular sign grid, three fixed type sizes and pictograms drawn on a single stroke weight. Installers work from a spec card, not a designer.",
+    tags: ["Wayfinding", "Pictograms", "Sign spec", "Rollout"],
+    frames: [["Arrow", "The single directional device"], ["Signs", "Modular panel sizes"], ["Pictograms", "One-weight stroke set"], ["Rollout", "Corridor map and install order"]]
+  },
+  {
+    title: "Salt & Stone", tagline: "Wood-fired restaurant", kicker: "Identity / Menu", year: "2024",
+    idea: "A twelve-seat kitchen where the menu changes daily. The identity is built for a printer in the back office: everything the restaurant produces is one ink on one stock.",
+    system: "A stamped monogram, a single-column menu grid and a type scale that holds from a place card to a shopfront. Daily menus are set in a template the chef can fill in.",
+    tags: ["Monogram", "Menu system", "One ink", "Signage"],
+    frames: [["Monogram", "Stamp and shopfront cut"], ["Menu", "Daily single-column template"], ["Table", "Place cards and coasters"], ["Front", "Painted fascia study"]]
+  },
+  {
+    title: "Prisma", tagline: "Contemporary art festival", kicker: "Event identity", year: "2024",
+    idea: "A five-day festival across eleven venues needed a system that let each venue print its own material overnight without the whole thing falling apart.",
+    system: "A fixed grid with one variable: the accent rotates by day. Posters, wristbands and schedules all draw from the same eight-cell layout, so a venue only chooses content.",
+    tags: ["Poster series", "Grid", "Schedule", "Merch"],
+    frames: [["Poster", "Eight-cell master layout"], ["Days", "Accent rotation, five days"], ["Schedule", "Eleven-venue programme"], ["Merch", "Wristbands and totes"]]
+  }
+];
+
+const SERVICES = [
+  { name: "Brand identity", note: "Marks, systems" },
+  { name: "Packaging", note: "Label to shelf" },
+  { name: "Editorial", note: "Books, catalogues" },
+  { name: "Type & lettering", note: "Custom cuts" },
+  { name: "Wayfinding", note: "Signage specs" },
+  { name: "Art direction", note: "Photo, campaign" }
+];
+
+const CV = [
+  { heading: "Experience", items: [
+    { title: "ICTO Intern", years: "Jan 2026 — May 2026", detail: "Information and Communication Technology Office, MSU–General Santos." },
+    { title: "Research & Development Specialist", years: "Mar 2025 — Dec 2025", detail: "Work Beyond Borders — lead generation and CRM data management for marketing outreach." },
+    { title: "Senator", years: "May 2025 — Jun 2026", detail: "Supreme Student Council, MSU–GenSan — at-large senator representing ~11,000 students." },
+    { title: "President", years: "May 2025 — May 2026", detail: "Alliance of Guardians for Oceans Sustainability — marine conservation youth org under PAMB." },
+    { title: "President", years: "Aug 2024 — May 2025", detail: "Junior Information Technology Society, MSU–GenSan." },
+    { title: "Social Media Manager", years: "Aug 2023 — Jun 2026", detail: "JITS, University SSC & IT/Physics Dept — content across platforms, 100–29,000 followers reached." },
+    { title: "Student Head, Multimedia Committee", years: "2024 — 2026", detail: "6th–8th Pre-Commencement Exercises, CNSM — visuals and technical direction for 240+ graduates." }
+  ]},
+  { heading: "Education", items: [
+    { title: "BS Information Technology, Major in Database Systems", years: "Sep 2022 — Jul 2026", detail: "Mindanao State University – General Santos. Dean's Lister, 2022–2023." },
+    { title: "Senior High School — STEM Strand", years: "2020 — 2022", detail: "General Santos City SPED Integrated School. With High Honors." },
+    { title: "Junior High School", years: "2016 — 2020", detail: "General Santos City SPED Integrated School. With Honors." }
+  ]},
+  { heading: "Certifications", items: [
+    { title: "Professional Civil Service Exam — Passer", years: "Pen & Paper Test", detail: "Civil Service Commission, Philippines." },
+    { title: "EF SET English Certificate — C2 Proficient", years: "Reading C2 · Listening C2", detail: "Speaking C1, Writing B2." },
+    { title: "Dean's Lister", years: "2022 — 2023", detail: "MSU–General Santos." },
+    { title: "Guest Speaker, Innovators Camp 2025", years: "Mar 2025", detail: "Talk on the advancement of technology in education." }
+  ]}
+];
+
+const RESUME = {
+  headline: "IT student, database-systems focused",
+  focus: "Information technology and database systems, with hands-on leadership across student government, multimedia production and community organizing.",
+  based: "General Santos City, Philippines — MSU–GenSan. English (C2), Filipino."
+};
+
+// Mosaic: [column span, tile height] per project — deliberately uneven. Cycled by index, so any project count works.
+const SPANS = [[7, 380], [5, 380], [5, 300], [7, 300], [8, 340], [4, 340]];
+
+const ADMIN_PASSCODE = "cju-admin-2026";
+const LS_PREFIX = "cjuPortfolio.";
+function lsLoad(key, fallback) {
+  try {
+    const raw = localStorage.getItem(LS_PREFIX + key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function lsSave(key, val) {
+  try { localStorage.setItem(LS_PREFIX + key, JSON.stringify(val)); } catch {}
+}
+function lsClear(key) {
+  try { localStorage.removeItem(LS_PREFIX + key); } catch {}
+}
+function blankProject() {
+  return {
+    title: "New project", tagline: "Tagline", kicker: "Kicker", year: String(new Date().getFullYear()),
+    idea: "", system: "", tags: [],
+    frames: [["Frame 1", "Caption"]]
+  };
+}
+
+class Component extends DCLogic {
+  state = {
+    openIndex: null, frame: 0, cvTab: 0,
+    projects: lsLoad("projects", DATA),
+    services: lsLoad("services", SERVICES),
+    cv: lsLoad("cv", CV),
+    resume: lsLoad("resume", RESUME),
+    isAdmin: lsLoad("isAdmin", false),
+    editMode: false,
+    showExport: false
+  };
+  progressRef = React.createRef();
+
+  applyTheme() {
+    const DEEP = { "#4fb9af": "#2f7d76", "#2f7d76": "#1f5a55", "#b98a4f": "#7d5a2c", "#6f7f9c": "#485870" };
+    const GROUND = {
+      beige: ["#e9e3d7", "#e3dccd", "#ded7c7", "#d5cdba"],
+      "warm-grey": ["#e6e4df", "#dcd9d2", "#d8d5cd", "#cfccc3"],
+      sand: ["#eee6d4", "#e6dcc4", "#e1d6bb", "#d8cbab"]
+    };
+    const acc = this.props.accentTone ?? "#4fb9af";
+    const g = GROUND[this.props.groundTone ?? "beige"] || GROUND.beige;
+    const r = document.documentElement.style;
+    r.setProperty("--acc", acc);
+    r.setProperty("--acc-deep", DEEP[acc] || acc);
+    r.setProperty("--on-acc", "#14312e");
+    r.setProperty("--ground", g[0]);
+    r.setProperty("--ground-2", g[1]);
+    r.setProperty("--tile-a", g[2]);
+    r.setProperty("--tile-b", g[3]);
+    r.setProperty("--ticker-play", (this.props.tickerMotion ?? true) ? "running" : "paused");
+  }
+  componentDidUpdate() { this.applyTheme(); }
+
+  componentDidMount() {
+    this.applyTheme();
+    this._key = (e) => {
+      if (e.key === "Escape" && this.state.showExport) { this.setState({ showExport: false }); return; }
+      if (this.state.openIndex === null) return;
+      const typing = ["INPUT", "TEXTAREA"].includes(e.target?.tagName);
+      if (e.key === "Escape") this.setState({ openIndex: null });
+      if (typing) return;
+      if (e.key === "ArrowRight") this.shiftFrame(1);
+      if (e.key === "ArrowLeft") this.shiftFrame(-1);
+    };
+    window.addEventListener("keydown", this._key);
+
+    this._scroll = () => {
+      const el = this.progressRef.current;
+      if (!el) return;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      el.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+    };
+    window.addEventListener("scroll", this._scroll, { passive: true });
+    this._scroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this._key);
+    window.removeEventListener("scroll", this._scroll);
+  }
+
+  shiftFrame(d) {
+    const n = this.state.projects[this.state.openIndex].frames.length;
+    this.setState((s) => ({ frame: (s.frame + d + n) % n }));
+  }
+  shiftProject(d) {
+    this.setState((s) => ({ openIndex: (s.openIndex + d + s.projects.length) % s.projects.length, frame: 0 }));
+  }
+
+  // --- admin: unlock / lock / edit mode ---
+  unlockAdmin = () => {
+    const pass = window.prompt("Admin passcode:");
+    if (pass === null) return;
+    if (pass === ADMIN_PASSCODE) {
+      this.setState({ isAdmin: true });
+      lsSave("isAdmin", true);
+    } else {
+      window.alert("Incorrect passcode.");
+    }
+  };
+  lockAdmin = () => {
+    this.setState({ isAdmin: false, editMode: false });
+    lsSave("isAdmin", false);
+  };
+  toggleEditMode = () => this.setState((s) => ({ editMode: !s.editMode }));
+  openExport = () => this.setState({ showExport: true });
+  closeExport = () => this.setState({ showExport: false });
+  resetToDefaults = () => {
+    if (!window.confirm("Reset all content back to what's saved in the file? This clears your local edits.")) return;
+    lsClear("projects"); lsClear("services"); lsClear("cv"); lsClear("resume");
+    this.setState({ projects: DATA, services: SERVICES, cv: CV, resume: RESUME, openIndex: null, frame: 0, cvTab: 0 });
+  };
+
+  // --- projects ---
+  updateProjects(updater) {
+    this.setState((s) => {
+      const projects = updater(s.projects);
+      lsSave("projects", projects);
+      return { projects };
+    });
+  }
+  addProject = () => {
+    this.setState((s) => {
+      const projects = [...s.projects, blankProject()];
+      lsSave("projects", projects);
+      return { projects, openIndex: projects.length - 1, frame: 0 };
+    });
+  };
+  removeProjectAt(idx) {
+    if (!window.confirm("Delete this project?")) return;
+    this.updateProjects((list) => list.filter((_, i) => i !== idx));
+    this.setState({ openIndex: null, frame: 0 });
+  }
+  setActiveField(field) {
+    return (e) => {
+      const val = e.target.value;
+      const idx = this.state.openIndex;
+      this.updateProjects((list) => list.map((p, i) => (i === idx ? { ...p, [field]: val } : p)));
+    };
+  }
+  setActiveTags = (e) => {
+    const idx = this.state.openIndex;
+    const tags = e.target.value.split(",").map((t) => t.trim()).filter(Boolean);
+    this.updateProjects((list) => list.map((p, i) => (i === idx ? { ...p, tags } : p)));
+  };
+  setFrameField(part) {
+    return (e) => {
+      const val = e.target.value;
+      const idx = this.state.openIndex;
+      const fi = this.state.frame;
+      this.updateProjects((list) => list.map((p, i) => {
+        if (i !== idx) return p;
+        const frames = p.frames.map((f, j) => (j === fi ? (part === 0 ? [val, f[1]] : [f[0], val]) : f));
+        return { ...p, frames };
+      }));
+    };
+  }
+  addFrame = () => {
+    const idx = this.state.openIndex;
+    let nextFi = 0;
+    this.updateProjects((list) => list.map((p, i) => {
+      if (i !== idx) return p;
+      const frames = [...p.frames, ["Frame " + (p.frames.length + 1), "Caption"]];
+      nextFi = frames.length - 1;
+      return { ...p, frames };
+    }));
+    this.setState({ frame: nextFi });
+  };
+  removeFrame = () => {
+    const idx = this.state.openIndex;
+    this.updateProjects((list) => list.map((p, i) => {
+      if (i !== idx || p.frames.length <= 1) return p;
+      return { ...p, frames: p.frames.filter((_, j) => j !== this.state.frame) };
+    }));
+    this.setState((s) => ({ frame: Math.max(0, s.frame - 1) }));
+  };
+
+  // --- services ---
+  updateServices(updater) {
+    this.setState((s) => {
+      const services = updater(s.services);
+      lsSave("services", services);
+      return { services };
+    });
+  }
+  addService = () => this.updateServices((list) => [...list, { name: "New service", note: "" }]);
+
+  // --- cv ---
+  updateCv(updater) {
+    this.setState((s) => {
+      const cv = updater(s.cv);
+      lsSave("cv", cv);
+      return { cv };
+    });
+  }
+
+  // --- resume summary ---
+  updateResume(field, val) {
+    this.setState((s) => {
+      const resume = { ...s.resume, [field]: val };
+      lsSave("resume", resume);
+      return { resume };
+    });
+  }
+
+  buildExportText() {
+    const s = this.state;
+    return "const DATA = " + JSON.stringify(s.projects, null, 2) + ";\n\n"
+      + "const SERVICES = " + JSON.stringify(s.services, null, 2) + ";\n\n"
+      + "const CV = " + JSON.stringify(s.cv, null, 2) + ";\n\n"
+      + "const RESUME = " + JSON.stringify(s.resume, null, 2) + ";\n";
+  }
+
+  renderVals() {
+    const pad = (n) => String(n + 1).padStart(2, "0");
+    const i = this.state.openIndex;
+    const isOpen = i !== null;
+    const projects = this.state.projects;
+    const p = isOpen ? projects[i] : null;
+    const fi = isOpen ? Math.min(this.state.frame, p.frames.length - 1) : 0;
+    const editMode = this.state.editMode;
+
+    const tab = (on, dark) => [
+      "display:flex", "align-items:center", "gap:11px", "cursor:pointer",
+      "padding:16px 20px", "border:0",
+      dark ? "border-right:1px solid rgba(233,227,215,0.24)" : "border-right:1px solid rgba(31,29,26,0.2)",
+      "font-family:'Bebas Neue',sans-serif", "font-size:15px",
+      "letter-spacing:0.16em", "text-align:left",
+      "transition:background 220ms,color 220ms",
+      on ? "background:var(--acc, #4fb9af)" : "background:transparent",
+      on ? "color:var(--on-acc, #14312e)" : (dark ? "color:#9c968a" : "color:#6b6659")
+    ].join(";");
+
+    const tileStyle = (idx) => {
+      const span = SPANS[idx % SPANS.length];
+      return [
+        "grid-column:span " + span[0],
+        "display:flex", "flex-direction:column",
+        "height:" + span[1] + "px",
+        "cursor:pointer"
+      ].join(";");
+    };
+
+    const imgStyle = (idx) => [
+      "position:absolute", "inset:0",
+      "background-image:repeating-linear-gradient(" + (idx % 2 ? 45 : 135) + "deg, var(--tile-a, #ded7c7) 0 10px, var(--tile-b, #d5cdba) 10px 20px)",
+      "filter:grayscale(0.35) contrast(1.02)",
+      "transform-origin:center",
+      "transition:transform 620ms cubic-bezier(.2,.7,.2,1),filter 420ms"
+    ].join(";");
+
+    const cvGroup = this.state.cv[this.state.cvTab];
+
+    return {
+      projects: projects.map((d, idx) => ({
+        num: pad(idx), title: d.title, kicker: d.kicker, year: d.year,
+        frameHint: d.frames.map((f) => f[0]).join(" / "),
+        tileStyle: tileStyle(idx), imgStyle: imgStyle(idx),
+        open: () => this.setState({ openIndex: idx, frame: 0 }),
+        remove: (e) => { e.stopPropagation(); this.removeProjectAt(idx); }
+      })),
+      projectCount: String(projects.length).padStart(2, "0"),
+      addProject: this.addProject,
+      services: this.state.services.map((sv, idx) => ({
+        name: sv.name, note: sv.note,
+        setName: (e) => this.updateServices((list) => list.map((x, j) => (j === idx ? { ...x, name: e.target.value } : x))),
+        setNote: (e) => this.updateServices((list) => list.map((x, j) => (j === idx ? { ...x, note: e.target.value } : x))),
+        remove: () => this.updateServices((list) => list.filter((_, j) => j !== idx))
+      })),
+      addService: this.addService,
+      progressRef: this.progressRef,
+      resume: {
+        headline: this.state.resume.headline,
+        focus: this.state.resume.focus,
+        based: this.state.resume.based,
+        setHeadline: (e) => this.updateResume("headline", e.target.value),
+        setFocus: (e) => this.updateResume("focus", e.target.value),
+        setBased: (e) => this.updateResume("based", e.target.value)
+      },
+      cvActive: {
+        heading: cvGroup.heading,
+        count: pad(cvGroup.items.length - 1),
+        items: cvGroup.items.map((it, idx) => ({
+          title: it.title, years: it.years, detail: it.detail,
+          setTitle: (e) => this.updateCv((cv) => cv.map((g, gi) => (gi !== this.state.cvTab ? g : { ...g, items: g.items.map((x, j) => (j === idx ? { ...x, title: e.target.value } : x)) }))),
+          setYears: (e) => this.updateCv((cv) => cv.map((g, gi) => (gi !== this.state.cvTab ? g : { ...g, items: g.items.map((x, j) => (j === idx ? { ...x, years: e.target.value } : x)) }))),
+          setDetail: (e) => this.updateCv((cv) => cv.map((g, gi) => (gi !== this.state.cvTab ? g : { ...g, items: g.items.map((x, j) => (j === idx ? { ...x, detail: e.target.value } : x)) }))),
+          remove: () => this.updateCv((cv) => cv.map((g, gi) => (gi !== this.state.cvTab ? g : { ...g, items: g.items.filter((_, j) => j !== idx) })))
+        })),
+        addItem: () => this.updateCv((cv) => cv.map((g, gi) => (gi !== this.state.cvTab ? g : { ...g, items: [...g.items, { title: "New entry", years: "", detail: "" }] })))
+      },
+      cvRecordNum: pad(this.state.cvTab),
+      cvTabs: this.state.cv.map((c, idx) => ({
+        num: pad(idx), label: c.heading, style: tab(idx === this.state.cvTab, false),
+        select: () => this.setState({ cvTab: idx })
+      })),
+      isOpen,
+      editMode,
+      active: isOpen ? {
+        num: pad(i), title: p.title, tagline: p.tagline, kicker: p.kicker, year: p.year,
+        idea: p.idea, system: p.system, tags: p.tags, tagsText: p.tags.join(", "),
+        frameLabel: p.frames[fi][0], frameCaption: p.frames[fi][1],
+        nextLabel: projects[(i + 1) % projects.length].title,
+        setTitle: this.setActiveField("title"), setTagline: this.setActiveField("tagline"),
+        setKicker: this.setActiveField("kicker"), setYear: this.setActiveField("year"),
+        setIdea: this.setActiveField("idea"), setSystem: this.setActiveField("system"),
+        setTags: this.setActiveTags,
+        setFrameLabel: this.setFrameField(0), setFrameCaption: this.setFrameField(1),
+        addFrame: this.addFrame, removeFrame: this.removeFrame, canRemoveFrame: p.frames.length > 1,
+        remove: () => this.removeProjectAt(i)
+      } : {},
+      frameTabs: isOpen ? p.frames.map((f, idx) => ({
+        num: pad(idx), label: f[0], style: tab(idx === fi, true),
+        select: () => this.setState({ frame: idx })
+      })) : [],
+      close: () => this.setState({ openIndex: null }),
+      nextProject: () => this.shiftProject(1),
+      prevProject: () => this.shiftProject(-1),
+      isAdmin: this.state.isAdmin,
+      unlockAdmin: this.unlockAdmin,
+      lockAdmin: this.lockAdmin,
+      toggleEditMode: this.toggleEditMode,
+      editModeLabel: editMode ? "Editing — Done" : "Edit content",
+      editModeButtonStyle: [
+        "cursor:pointer", "text-align:left", "border:1px solid var(--acc-deep, #2f7d76)",
+        "padding:8px 10px", "font-family:'Bebas Neue',sans-serif", "font-size:13px", "letter-spacing:0.1em",
+        editMode ? "background:var(--acc, #4fb9af)" : "background:transparent",
+        editMode ? "color:var(--on-acc, #14312e)" : "color:#1f1d1a"
+      ].join(";"),
+      showExport: this.state.showExport,
+      openExport: this.openExport,
+      closeExport: this.closeExport,
+      resetToDefaults: this.resetToDefaults,
+      exportText: this.state.showExport ? this.buildExportText() : ""
+    };
+  }
+}
+
+</script>
+</body>
+</html>

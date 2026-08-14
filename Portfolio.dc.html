@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-9d227bb0-ba54-4252-b882-389c0b7d8eb4/styles.css">
+<script src="_ds/modernist-9d227bb0-ba54-4252-b882-389c0b7d8eb4/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { -webkit-font-smoothing: antialiased; }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes overlayIn { from { opacity: 0; transform: translateY(2%); } to { opacity: 1; transform: none; } }
+  a { color: var(--color-accent); text-decoration: none; }
+  a:hover { color: var(--color-accent-700); }
+  .row-hit:hover .row-num { color: var(--color-accent); }
+  .row-hit:hover .row-title { transform: translateX(14px); color: var(--color-accent); }
+  .row-hit:hover .row-open { opacity: 1; transform: translateX(0); }
+  .row-hit:hover .row-thumb { opacity: 1; }
+  @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .nav-link { position: relative; display: flex; align-items: baseline; gap: 7px; }
+  .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--color-accent); transform: scaleX(0); transform-origin: left; transition: transform 300ms cubic-bezier(.2,.7,.2,1); }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link:hover .nav-idx { color: var(--color-accent); }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh;">
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: color-mix(in srgb, var(--color-bg) 82%, transparent); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border-bottom: 2px solid var(--color-divider);">
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; padding: 13px 32px;">
+      <a href="#top" style="display: flex; align-items: baseline; gap: 10px; color: var(--color-text);">
+        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;">Carl Jude Utrera</span>
+        <span class="text-muted" style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;">Graphic Design</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 34px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">
+        <a class="nav-link" href="#work" style="color: var(--color-text);"><span class="nav-idx text-muted" style="font-size: 9px; transition: color 200ms;">01</span>Work</a>
+        <a class="nav-link" href="#about" style="color: var(--color-text);"><span class="nav-idx text-muted" style="font-size: 9px; transition: color 200ms;">02</span>About</a>
+        <a class="nav-link" href="#cv" style="color: var(--color-text);"><span class="nav-idx text-muted" style="font-size: 9px; transition: color 200ms;">03</span>Résumé</a>
+        <a class="nav-link" href="#contact" style="color: var(--color-text);"><span class="nav-idx text-muted" style="font-size: 9px; transition: color 200ms;">04</span>Contact</a>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;">
+        <span style="width: 7px; height: 7px; background: var(--color-accent); animation: pulseDot 2.4s ease-in-out infinite;"></span>
+        <span>Open for 2026 projects</span>
+      </div>
+    </div>
+    <div style="height: 2px; background: transparent;">
+      <div ref="{{ progressRef }}" style="height: 2px; width: 0%; background: var(--color-accent);"></div>
+    </div>
+  </div>
+
+  <section id="top" data-screen-label="Hero" style="padding: 96px 32px 0; display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh; box-sizing: border-box;">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--color-divider); padding-top: 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">
+      <div>Graphic Design</div>
+      <div>Brand Identity</div>
+      <div>Since 2019</div>
+      <div style="color: var(--color-accent);">Available for work</div>
+    </div>
+
+    <h1 style="margin: 0; font-size: clamp(64px, 15.2vw, 260px); line-height: 0.84; letter-spacing: -0.04em; text-transform: uppercase; animation: riseIn 700ms cubic-bezier(.2,.7,.2,1) both;">
+      Carl<br>Jude<br><span style="color: var(--color-accent);">Utrera</span>
+    </h1>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--color-divider); margin-top: 40px;">
+      <div style="padding: 14px 16px 22px 0; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;">Scroll</div>
+      <div style="padding: 14px 16px 22px 0; grid-column: span 2; font-size: 15px; max-width: 46ch; text-wrap: pretty;">Identity systems, marks and packaging built on grids that hold up in print and on screen.</div>
+      <div style="padding: 14px 0 22px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; text-align: right;">{{ projectCount }} Projects</div>
+    </div>
+  </section>
+
+  <section id="work" data-screen-label="Selected work" style="padding: 72px 32px 0;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; border-bottom: 2px solid var(--color-divider); padding-bottom: 12px;">
+      <h2 style="margin: 0; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;">Selected work</h2>
+      <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;" class="text-muted">Open a case study</span>
+    </div>
+
+    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+      <div class="row-hit" onClick="{{ p.open }}" style="display: grid; grid-template-columns: 72px minmax(0, 1fr) 200px 130px 40px; align-items: center; gap: 16px; padding: var(--row-pad, 26px) 0; border-bottom: 2px solid var(--color-divider); cursor: pointer; position: relative;">
+        <div class="row-num" style="font-family: var(--font-heading); font-weight: 800; font-size: 13px; letter-spacing: 0.1em; transition: color 220ms;">{{ p.num }}</div>
+        <div class="row-title" style="font-family: var(--font-heading); font-weight: 800; font-size: clamp(30px, 4.4vw, 62px); line-height: 1; letter-spacing: -0.03em; text-transform: uppercase; transition: transform 320ms cubic-bezier(.2,.7,.2,1), color 220ms;">{{ p.title }}</div>
+        <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;" class="text-muted">{{ p.kicker }}</div>
+        <div class="row-thumb grayscale" style="display: var(--thumb-display, block); opacity: 0; transition: opacity 260ms; height: 64px; background-image: repeating-linear-gradient(135deg, var(--color-neutral-300) 0 6px, var(--color-neutral-200) 6px 12px); border: 1px solid var(--color-divider);"></div>
+        <div class="row-open" style="opacity: 0; transform: translateX(-10px); transition: all 300ms cubic-bezier(.2,.7,.2,1); font-family: var(--font-heading); font-weight: 800; font-size: 22px; color: var(--color-accent); text-align: right;">→</div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section id="about" data-screen-label="About" style="padding: 96px 32px 0;">
+    <div style="border-top: 2px solid var(--color-divider); padding-top: 12px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-heading); font-weight: 800;">About</div>
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; padding: 40px 0 0;">
+      <div>
+        <p style="font-size: clamp(22px, 2.6vw, 36px); line-height: 1.18; letter-spacing: -0.02em; max-width: 30ch; margin: 0 0 28px;">I build identities that behave like systems — a mark, a grid, a type scale and the rules that keep them honest.</p>
+        <p style="max-width: 56ch; color: var(--color-neutral-800);">Seven years across studio and in-house work, mostly for food, culture and small manufacturers. I work from the constraints out: how it prints, how it stacks on a shelf, how it survives a junior designer six months from now. Every project ships with a specification, not a mood board.</p>
+        <p style="max-width: 56ch; color: var(--color-neutral-800);">Based in Manila. Working with clients across Southeast Asia and remote.</p>
+      </div>
+      <div>
+        <div style="display: grid; gap: 0; border-top: 2px solid var(--color-divider);">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--color-divider); font-size: 13px;">
+              <span style="font-family: var(--font-heading); font-weight: 800; letter-spacing: 0.02em;">{{ s.name }}</span>
+              <span class="text-muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">{{ s.note }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;">
+          <span class="tag tag-outline">Illustrator</span>
+          <span class="tag tag-outline">InDesign</span>
+          <span class="tag tag-outline">Glyphs</span>
+          <span class="tag tag-outline">Figma</span>
+          <span class="tag tag-accent">Letterpress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv" data-screen-label="CV" style="padding: 96px 32px 0;">
+    <div style="border-top: 2px solid var(--color-divider); padding-top: 12px; display: flex; align-items: baseline; justify-content: space-between;">
+      <span style="font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-family: var(--font-heading); font-weight: 800;">Résumé</span>
+      <a href="#contact" class="btn btn-secondary" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">Request PDF</a>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.35fr 1fr; margin-top: 28px; border: 2px solid var(--color-divider);">
+
+      <div style="display: flex; flex-direction: column; min-width: 0; border-right: 2px solid var(--color-divider);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 2px solid var(--color-divider); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;">
+          <span>Record {{ cvRecordNum }} / 03</span>
+          <span style="color: var(--color-accent-700);">{{ cvActive.heading }}</span>
+        </div>
+        <div style="flex: 1; padding: 28px 24px 32px;">
+          <sc-for list="{{ cvActive.items }}" as="i" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: start; padding: 18px 0; border-bottom: 1px solid var(--color-divider);">
+              <div class="text-muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">{{ i.years }}</div>
+              <div>
+                <div style="font-family: var(--font-heading); font-weight: 800; font-size: 19px; letter-spacing: -0.01em;">{{ i.title }}</div>
+                <div style="font-size: 14px; margin-top: 5px; color: var(--color-neutral-800); text-wrap: pretty;">{{ i.detail }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 2px solid var(--color-divider);">
+          <sc-for list="{{ cvTabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.select }}" style="{{ t.style }}">
+              <span style="opacity: 0.55;">{{ t.num }}</span>
+              <span>{{ t.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: var(--color-surface); padding: 28px 24px 32px;">
+        <div style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--color-accent-700);">Practice summary</div>
+        <h3 style="margin: 10px 0 18px; font-size: 30px; line-height: 1; letter-spacing: -0.03em; text-transform: uppercase;">Seven years,<br>specification first</h3>
+        <hr class="hr" style="margin: 0 0 20px;">
+        <div style="display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: start;">
+          <div class="text-muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Focus</div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5;">Identity systems, packaging and wayfinding for food, culture and small manufacturers — always shipped with a written spec.</p>
+        </div>
+        <hr class="hr" style="margin: 20px 0;">
+        <div style="display: grid; grid-template-columns: 92px 1fr; gap: 18px; align-items: start;">
+          <div class="text-muted" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;">Based</div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5;">Manila, working with clients across Southeast Asia and remote. English and Filipino.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px;">
+          <span class="tag tag-outline" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">Identity</span>
+          <span class="tag tag-outline" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">Packaging</span>
+          <span class="tag tag-outline" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">Editorial</span>
+          <span class="tag tag-accent" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">Available</span>
+        </div>
+        <hr class="hr" style="margin: 26px 0 18px;">
+        <a href="mailto:hello@carljude.design" class="btn btn-primary btn-block" style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;">Request the full PDF →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" data-screen-label="Contact" style="margin-top: 96px; background: var(--color-accent); color: var(--color-bg); padding: 72px 32px 40px;">
+    <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; border-bottom: 2px solid rgba(243, 242, 242, 0.5); padding-bottom: 12px;">Contact</div>
+    <h2 style="margin: 32px 0 40px; font-size: clamp(40px, 8vw, 132px); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase;">Have a brand<br>that needs<br>a spine?</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; border-top: 2px solid rgba(243, 242, 242, 0.5); padding-top: 16px; font-size: 13px;">
+      <a href="mailto:hello@carljude.design" style="color: var(--color-bg); font-family: var(--font-heading); font-weight: 800;">hello@carljude.design</a>
+      <a href="#top" style="color: var(--color-bg);">Instagram</a>
+      <a href="#top" style="color: var(--color-bg);">Behance</a>
+      <div style="text-align: right; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">© 2026</div>
+    </div>
+  </section>
+
+  <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; background: var(--color-neutral-900); color: var(--color-bg); display: grid; grid-template-columns: 1.35fr 1fr; animation: overlayIn 380ms cubic-bezier(.2,.7,.2,1) both;">
+
+      <div style="display: flex; flex-direction: column; min-width: 0; border-right: 2px solid rgba(243, 242, 242, 0.28);">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; border-bottom: 2px solid rgba(243, 242, 242, 0.28); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;">
+          <span>Case study {{ active.num }} / {{ projectCount }}</span>
+          <span style="color: var(--color-accent-400);">{{ active.kicker }}</span>
+        </div>
+        <div style="flex: 1; min-height: 0; padding: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="grayscale" style="position: relative; width: 100%; height: 100%; border: 1px solid rgba(243, 242, 242, 0.3); background-image: repeating-linear-gradient(135deg, var(--color-neutral-700) 0 8px, var(--color-neutral-800) 8px 16px);">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; color: var(--color-neutral-300);">{{ active.frameCaption }}</div>
+            <div style="position: absolute; right: 0; bottom: 0; background: var(--color-accent); color: var(--color-bg); padding: 8px 14px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800;">{{ active.frameLabel }}</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border-top: 2px solid rgba(243, 242, 242, 0.28);">
+          <sc-for list="{{ frameTabs }}" as="t" hint-placeholder-count="4">
+            <button onClick="{{ t.select }}" style="{{ t.style }}">
+              <span style="opacity: 0.6;">{{ t.num }}</span>
+              <span>{{ t.label }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background: var(--color-bg); color: var(--color-text); overflow-y: auto;">
+        <div style="display: flex; align-items: center; justify-content: flex-end; padding: 12px 16px; border-bottom: 2px solid var(--color-divider);">
+          <button onClick="{{ close }}" class="btn btn-primary" style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; gap: 10px;">Close ✕</button>
+        </div>
+        <div style="padding: 40px 40px 64px;">
+          <div style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--color-accent-700);">{{ active.tagline }}</div>
+          <h2 style="margin: 12px 0 6px; font-size: clamp(40px, 6vw, 84px); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase;">{{ active.title }}</h2>
+          <div class="text-muted" style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;">{{ active.kicker }} — {{ active.year }}</div>
+          <hr class="hr" style="margin: 28px 0;">
+          <div style="display: grid; grid-template-columns: 108px 1fr; gap: 20px; align-items: start;">
+            <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;" class="text-muted">The idea</div>
+            <p style="margin: 0; font-size: 16px; line-height: 1.5; text-wrap: pretty;">{{ active.idea }}</p>
+          </div>
+          <hr class="hr" style="margin: 24px 0;">
+          <div style="display: grid; grid-template-columns: 108px 1fr; gap: 20px; align-items: start;">
+            <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;" class="text-muted">The system</div>
+            <p style="margin: 0; font-size: 16px; line-height: 1.5; text-wrap: pretty;">{{ active.system }}</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0 0;">
+            <sc-for list="{{ active.tags }}" as="tg" hint-placeholder-count="4">
+              <span class="tag tag-outline" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">{{ tg }}</span>
+            </sc-for>
+          </div>
+          <hr class="hr" style="margin: 32px 0 20px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+            <button onClick="{{ prevProject }}" class="btn btn-secondary" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">← Previous</button>
+            <span class="text-muted" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">{{ active.nextLabel }}</span>
+            <button onClick="{{ nextProject }}" class="btn btn-primary" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;">Next case →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#ec3013&quot;,&quot;options&quot;:[&quot;#ec3013&quot;,&quot;#201e1d&quot;,&quot;#1c4fd8&quot;,&quot;#0f7a3d&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showThumbnails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Work index&quot;},&quot;workDensity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;roomy&quot;,&quot;options&quot;:[&quot;roomy&quot;,&quot;compact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Work index&quot;}}">
+const DATA = [
+  {
+    title: "Test 1", tagline: "This is a super test", kicker: "Identity", year: "2026",
+    idea: "Placeholder case study standing in for your first project — swap this copy for the real brief and the structure holds.",
+    system: "A mark, a two-weight Archivo lockup, one accent and a grid specification that carries across print and screen.",
+    tags: ["Logotype", "Grid", "Print", "Guidelines"],
+    frames: [["Mark", "Primary mark, clear space and minimum size"], ["Palette", "Ink, ground and the single accent"], ["Application", "Stationery and signage tests"], ["Spec", "Grid and type specification sheet"]]
+  },
+  {
+    title: "Meridian", tagline: "Specialty roaster, Manila", kicker: "Identity / Packaging", year: "2026",
+    idea: "Meridian roasts single origins in small batches and needed shelf presence without a mascot. The identity is a compass bearing set as type — each origin gets its own degree mark, so the range reads as one family at a glance.",
+    system: "A monolinear logotype, a four-column label grid and origin coding by number rather than color. Labels print two-color on uncoated stock so new origins ship without new plates.",
+    tags: ["Logotype", "Packaging", "Label system", "Two-color"],
+    frames: [["Mark", "Logotype and bearing device"], ["Labels", "Origin label grid, six SKUs"], ["Bags", "Retail bag, 250g and 1kg"], ["Print", "Two-color uncoated proofs"]]
+  },
+  {
+    title: "Atlas Typeworks", tagline: "Independent type foundry", kicker: "Identity / Type", year: "2025",
+    idea: "A foundry selling five families had a website that looked like a folder. The identity treats the specimen as the brand: every surface is a size chart, and the logotype is drawn from the foundry's own grotesque.",
+    system: "One display cut for the wordmark, the release faces for everything else. A specimen module — size, weight, waterfall — repeats from the site to the printed catalogue.",
+    tags: ["Wordmark", "Specimen", "Editorial", "Web"],
+    frames: [["Wordmark", "Drawn from the house grotesque"], ["Specimen", "Waterfall and size chart module"], ["Catalogue", "96-page printed specimen"], ["Site", "Release page and licensing table"]]
+  },
+  {
+    title: "Northbound", tagline: "Regional transit authority", kicker: "Wayfinding", year: "2025",
+    idea: "Four bus lines, no shared vocabulary and signs added by whoever was nearest. Northbound gives the network one arrow, one type size table and a colour per corridor rather than per stop.",
+    system: "A 40mm modular sign grid, three fixed type sizes and pictograms drawn on the same 2px stroke as the rules. Installers work from a spec card, not a designer.",
+    tags: ["Wayfinding", "Pictograms", "Sign spec", "Rollout"],
+    frames: [["Arrow", "The single directional device"], ["Signs", "Modular panel sizes"], ["Pictograms", "2px stroke set"], ["Rollout", "Corridor map and install order"]]
+  },
+  {
+    title: "Salt & Stone", tagline: "Wood-fired restaurant", kicker: "Identity / Menu", year: "2024",
+    idea: "A twelve-seat kitchen where the menu changes daily. The identity is built for a printer in the back office: everything the restaurant produces is one ink on one stock.",
+    system: "A stamped monogram, a single-column menu grid and a type scale that holds from a place card to a shopfront. Daily menus are set in a template the chef can fill in.",
+    tags: ["Monogram", "Menu system", "One ink", "Signage"],
+    frames: [["Monogram", "Stamp and shopfront cut"], ["Menu", "Daily single-column template"], ["Table", "Place cards and coasters"], ["Front", "Painted fascia study"]]
+  },
+  {
+    title: "Prisma", tagline: "Contemporary art festival", kicker: "Event identity", year: "2024",
+    idea: "A five-day festival across eleven venues needed a system that let each venue print its own material overnight without the whole thing falling apart.",
+    system: "A fixed grid with one variable: the accent rotates by day. Posters, wristbands and schedules all draw from the same eight-cell layout, so a venue only chooses content.",
+    tags: ["Poster series", "Grid", "Schedule", "Merch"],
+    frames: [["Poster", "Eight-cell master layout"], ["Days", "Accent rotation, five days"], ["Schedule", "Eleven-venue programme"], ["Merch", "Wristbands and totes"]]
+  }
+];
+
+const SERVICES = [
+  { name: "Brand identity", note: "Marks, systems" },
+  { name: "Packaging", note: "Label to shelf" },
+  { name: "Editorial", note: "Books, catalogues" },
+  { name: "Type & lettering", note: "Custom cuts" },
+  { name: "Wayfinding", note: "Signage specs" },
+  { name: "Art direction", note: "Photo, campaign" }
+];
+
+const CV = [
+  { heading: "Experience", items: [
+    { title: "Independent practice", years: "2022 — Now", detail: "Identity and packaging for food, culture and manufacturing clients." },
+    { title: "Studio Grifo — Senior Designer", years: "2020 — 2022", detail: "Led identity work for retail and hospitality accounts." },
+    { title: "Publica — Designer", years: "2019 — 2020", detail: "Editorial layout and campaign production." }
+  ]},
+  { heading: "Education", items: [
+    { title: "BFA Visual Communication", years: "2015 — 2019", detail: "University of the Philippines, Diliman." },
+    { title: "Type Design Intensive", years: "2021", detail: "Typemedia short course, remote." }
+  ]},
+  { heading: "Selected recognition", items: [
+    { title: "Dieline Awards — Finalist", years: "2026", detail: "Meridian label system." },
+    { title: "Adobe Design Achievement", years: "2019", detail: "Semifinalist, editorial." },
+    { title: "Graphika Manila — Speaker", years: "2025", detail: "On specification-first identity." }
+  ]}
+];
+
+class Component extends DCLogic {
+  state = { openIndex: null, frame: 0, cvTab: 0 };
+  progressRef = React.createRef();
+
+  applyTheme() {
+    const r = document.documentElement.style;
+    r.setProperty("--color-accent", this.props.accentColor ?? "#ec3013");
+    r.setProperty("--thumb-display", (this.props.showThumbnails ?? true) ? "block" : "none");
+    r.setProperty("--row-pad", this.props.workDensity === "compact" ? "16px" : "26px");
+  }
+  componentDidUpdate() { this.applyTheme(); }
+
+  componentDidMount() {
+    this.applyTheme();
+    this._key = (e) => {
+      if (this.state.openIndex === null) return;
+      if (e.key === "Escape") this.setState({ openIndex: null });
+      if (e.key === "ArrowRight") this.shiftFrame(1);
+      if (e.key === "ArrowLeft") this.shiftFrame(-1);
+    };
+    window.addEventListener("keydown", this._key);
+
+    this._scroll = () => {
+      const el = this.progressRef.current;
+      if (!el) return;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      el.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+    };
+    window.addEventListener("scroll", this._scroll, { passive: true });
+    this._scroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this._key);
+    window.removeEventListener("scroll", this._scroll);
+  }
+
+  shiftFrame(d) {
+    const n = DATA[this.state.openIndex].frames.length;
+    this.setState((s) => ({ frame: (s.frame + d + n) % n }));
+  }
+  shiftProject(d) {
+    this.setState((s) => ({ openIndex: (s.openIndex + d + DATA.length) % DATA.length, frame: 0 }));
+  }
+
+  renderVals() {
+    const pad = (n) => String(n + 1).padStart(2, "0");
+    const i = this.state.openIndex;
+    const isOpen = i !== null;
+    const p = isOpen ? DATA[i] : null;
+    const fi = isOpen ? Math.min(this.state.frame, p.frames.length - 1) : 0;
+
+    const tabStyle = (on) => [
+      "display:flex", "align-items:center", "gap:12px", "cursor:pointer",
+      "padding:18px 22px", "border:0", "border-right:1px solid rgba(243,242,242,0.28)",
+      "font-family:var(--font-heading)", "font-weight:800", "font-size:11px",
+      "letter-spacing:0.16em", "text-transform:uppercase", "text-align:left",
+      "transition:background 200ms,color 200ms",
+      on ? "background:var(--color-accent)" : "background:transparent",
+      on ? "color:var(--color-bg)" : "color:var(--color-neutral-300)"
+    ].join(";");
+
+    const tabStyleLight = (on) => [
+      "display:flex", "align-items:center", "gap:12px", "cursor:pointer",
+      "padding:18px 22px", "border:0", "border-right:1px solid var(--color-divider)",
+      "font-family:var(--font-heading)", "font-weight:800", "font-size:11px",
+      "letter-spacing:0.16em", "text-transform:uppercase", "text-align:left",
+      "transition:background 200ms,color 200ms",
+      on ? "background:var(--color-accent)" : "background:transparent",
+      on ? "color:var(--color-bg)" : "color:var(--color-neutral-700)"
+    ].join(";");
+
+    return {
+      projects: DATA.map((d, idx) => ({
+        num: pad(idx), title: d.title, kicker: d.kicker,
+        open: () => this.setState({ openIndex: idx, frame: 0 })
+      })),
+      projectCount: pad(DATA.length - 1) === "0" ? "06" : String(DATA.length).padStart(2, "0"),
+      services: SERVICES,
+      progressRef: this.progressRef,
+      cvActive: CV[this.state.cvTab],
+      cvRecordNum: pad(this.state.cvTab),
+      cvTabs: CV.map((c, idx) => ({
+        num: pad(idx), label: c.heading, style: tabStyleLight(idx === this.state.cvTab),
+        select: () => this.setState({ cvTab: idx })
+      })),
+      isOpen,
+      active: isOpen ? {
+        num: pad(i), title: p.title, tagline: p.tagline, kicker: p.kicker, year: p.year,
+        idea: p.idea, system: p.system, tags: p.tags,
+        frameLabel: p.frames[fi][0], frameCaption: p.frames[fi][1],
+        nextLabel: DATA[(i + 1) % DATA.length].title
+      } : {},
+      frameTabs: isOpen ? p.frames.map((f, idx) => ({
+        num: pad(idx), label: f[0], style: tabStyle(idx === fi),
+        select: () => this.setState({ frame: idx })
+      })) : [],
+      close: () => this.setState({ openIndex: null }),
+      nextProject: () => this.shiftProject(1),
+      prevProject: () => this.shiftProject(-1)
+    };
+  }
+}
+
+</script>
+</body>
+</html>
