@@ -171,8 +171,11 @@
     <section id="work" data-screen-label="Selected work" style="padding: 78px 48px 0;">
       <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px;">
         <h3 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: 30px; letter-spacing: 0.1em;">Selected work</h3>
-        <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">{{ projectCount }} case studies — click to open</span>
+        <span style="font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #8a8579;">{{ shownCount }} of {{ projectCount }} — click to open</span>
       </div>
+      <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+        <p style="margin: 8px 0 0; font-size: 11px; color: #8a8579;">Only the first 5 (in this order) show here — use ↑ / ↓ to reorder which ones are featured. Everything shows on the "See all work" archive page.</p>
+      </sc-if>
 
       <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; margin-top: 24px; padding-bottom: 12px;">
         <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
@@ -184,6 +187,14 @@
               <div class="tile-open" style="position: absolute; bottom: 0; right: 0; opacity: 0; transform: translate(6px, 6px); transition: all 300ms cubic-bezier(.2,.7,.2,1); background: var(--acc, #4fb9af); color: var(--on-acc, #14312e); padding: 8px 13px; font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.16em;">Open →</div>
               <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
                 <button onClick="{{ p.remove }}" style="position: absolute; top: 8px; right: 10px; cursor: pointer; background: #7a2f2f; border: 0; color: #f3ece3; width: 22px; height: 22px; line-height: 1; font-size: 13px;">×</button>
+                <div style="position: absolute; top: 8px; left: 10px; display: flex; flex-direction: column; gap: 3px;">
+                  <sc-if value="{{ p.canMoveUp }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ p.moveUp }}" title="Move up (more featured)" style="cursor: pointer; background: rgba(31,29,26,0.75); border: 0; color: #f3ece3; width: 22px; height: 22px; line-height: 1; font-size: 11px;">↑</button>
+                  </sc-if>
+                  <sc-if value="{{ p.canMoveDown }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ p.moveDown }}" title="Move down" style="cursor: pointer; background: rgba(31,29,26,0.75); border: 0; color: #f3ece3; width: 22px; height: 22px; line-height: 1; font-size: 11px;">↓</button>
+                  </sc-if>
+                </div>
               </sc-if>
             </div>
             <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding-top: 11px; min-width: 0;">
@@ -198,6 +209,10 @@
           </div>
         </sc-if>
       </div>
+
+      <sc-if value="{{ hasMoreProjects }}" hint-placeholder-val="{{ false }}">
+        <a href="./archive" style="display: inline-flex; align-items: center; gap: 9px; margin-top: 6px; padding: 11px 18px; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">See all {{ projectCount }} projects →</a>
+      </sc-if>
     </section>
 
     <section id="about" data-screen-label="About" style="padding: 46px 48px 0; border-top: 1px solid rgba(31, 29, 26, 0.22); margin-top: 34px;">
@@ -661,6 +676,17 @@ class Component extends DCLogic {
 
   componentDidMount() {
     this.applyTheme();
+
+    // Make sure the archive page (a plain static page with no React state of its own)
+    // has something to read from localStorage even if this browser never customized content.
+    if (!localStorage.getItem(LS_PREFIX + "projects")) lsSave("projects", this.state.projects);
+
+    const params = new URLSearchParams(window.location.search);
+    const pIdx = parseInt(params.get("project"), 10);
+    if (!Number.isNaN(pIdx) && this.state.projects[pIdx]) {
+      this.setState({ openIndex: pIdx, frame: 0 });
+    }
+
     this._key = (e) => {
       if (e.key === "Escape" && this.state.showExport) { this.setState({ showExport: false }); return; }
       if (this.state.openIndex === null) return;
@@ -762,6 +788,17 @@ class Component extends DCLogic {
     if (!window.confirm("Delete this project?")) return;
     this.updateProjects((list) => list.filter((_, i) => i !== idx));
     this.setState({ openIndex: null, frame: 0 });
+  }
+  moveProject(idx, dir) {
+    this.updateProjects((list) => {
+      const j = idx + dir;
+      if (j < 0 || j >= list.length) return list;
+      const next = list.slice();
+      const tmp = next[idx];
+      next[idx] = next[j];
+      next[j] = tmp;
+      return next;
+    });
   }
   setActiveField(field) {
     return (e) => {
@@ -1003,10 +1040,15 @@ class Component extends DCLogic {
           frameHint: d.frames.map((f) => f.label).join(" / "),
           tileStyle: tileStyle(idx), imgStyle: imgStyle(idx, thumb),
           open: () => this.setState({ openIndex: idx, frame: 0 }),
-          remove: (e) => { e.stopPropagation(); this.removeProjectAt(idx); }
+          remove: (e) => { e.stopPropagation(); this.removeProjectAt(idx); },
+          moveUp: (e) => { e.stopPropagation(); this.moveProject(idx, -1); },
+          moveDown: (e) => { e.stopPropagation(); this.moveProject(idx, 1); },
+          canMoveUp: idx > 0, canMoveDown: idx < projects.length - 1
         };
-      }),
+      }).slice(0, 5),
       projectCount: String(projects.length).padStart(2, "0"),
+      shownCount: String(Math.min(projects.length, 5)).padStart(2, "0"),
+      hasMoreProjects: projects.length > 5,
       addProject: this.addProject,
       services: this.state.services.map((sv, idx) => ({
         name: sv.name, note: sv.note,

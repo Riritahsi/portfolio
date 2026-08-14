@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/Portfolio%20v2.dc.html" }
+    { "source": "/", "destination": "/Portfolio%20v2.dc.html" },
+    { "source": "/archive", "destination": "/archive.html" }
   ]
 }
