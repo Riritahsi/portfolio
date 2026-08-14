@@ -44,10 +44,13 @@
   </div>
 
   <div style="position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: riseIn 700ms cubic-bezier(.2,.7,.2,1) both;">
-    <h2 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: clamp(64px, 14vw, 240px); line-height: 0.8; letter-spacing: 0.01em;">
-      IDEAS<br><span style="color: var(--acc-deep, #2f7d76);">IN</span><br>ACTION
-    </h2>
-    <p style="margin: 22px 0 0; max-width: 44ch; font-size: 15px; line-height: 1.62; font-weight: 300; color: #3a3730; text-wrap: pretty;">Marks, grids and type scales that survive the handover — every project ships with a written specification, not a mood board.</p>
+    <div style="display: flex; align-items: stretch; gap: clamp(10px, 1.6vw, 20px); transform: rotate(-16deg);">
+      <div style="width: clamp(14px, 2.2vw, 26px); background: var(--acc, #4fb9af); filter: drop-shadow(7px 11px 15px rgba(20,18,15,0.35));"></div>
+      <h2 style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; margin: 0; font-size: clamp(52px, 10.5vw, 168px); line-height: 0.86; letter-spacing: 0.01em; white-space: nowrap; text-align: left;">
+        DEAS<br>N<br>ACTION
+      </h2>
+    </div>
+    <p style="margin: 26px 0 0; max-width: 44ch; font-size: 15px; line-height: 1.62; font-weight: 300; color: #3a3730; text-wrap: pretty;">Marks, grids and type scales that survive the handover — every project ships with a written specification, not a mood board.</p>
     <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; justify-content: center;">
       <a href="#work" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; background: #1f1d1a; color: var(--ground, #e9e3d7); font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">See the work →</a>
       <a href="#cv" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border: 1px solid rgba(31, 29, 26, 0.4); color: #1f1d1a; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 0.14em;">Résumé</a>
@@ -72,11 +75,14 @@
   </div>
 </section>
 
-<div id="content" style="background: var(--ground, #e9e3d7); color: #1f1d1a; font-family: 'Poppins', system-ui, sans-serif; display: grid; grid-template-columns: 312px minmax(0, 1fr); min-height: 100vh;">
+<div id="content" style="{{ contentGridStyle }}">
 
   <aside style="{{ asideStyle }}">
+    <button onClick="{{ toggleSidebarCollapse }}" title="Collapse sidebar" style="cursor: pointer; position: absolute; top: 20px; right: 16px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; font-size: 15px; z-index: 2;">{{ collapseToggleLabel }}</button>
+
+    <sc-if value="{{ !sidebarCollapsed }}" hint-placeholder-val="{{ true }}">
     <div>
-      <div style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 34px; letter-spacing: 0.04em; line-height: 1;">
+      <div style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 34px; letter-spacing: 0.04em; line-height: 1; padding-right: 34px;">
         Carl Jude <span style="color: var(--acc-deep, #2f7d76);">Utrera</span>
       </div>
       <div style="margin-top: 10px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #4a463f;">Graphic Design — Brand Identity</div>
@@ -126,6 +132,7 @@
         </div>
       </sc-if>
     </div>
+    </sc-if>
   </aside>
 
   <sc-if value="{{ showExport }}" hint-placeholder-val="{{ false }}">
@@ -634,7 +641,8 @@ class Component extends DCLogic {
     editMode: false,
     showExport: false,
     cropper: null,
-    sidebarVisible: false
+    sidebarVisible: false,
+    sidebarCollapsed: lsLoad("sidebarCollapsed", false)
   };
   progressRef = React.createRef();
 
@@ -728,6 +736,13 @@ class Component extends DCLogic {
   };
   toggleEditMode = () => this.setState((s) => ({ editMode: !s.editMode }));
   scrollToContent = () => document.getElementById("content")?.scrollIntoView({ behavior: "smooth" });
+  toggleSidebarCollapse = () => {
+    this.setState((s) => {
+      const sidebarCollapsed = !s.sidebarCollapsed;
+      lsSave("sidebarCollapsed", sidebarCollapsed);
+      return { sidebarCollapsed };
+    });
+  };
   openExport = () => this.setState({ showExport: true });
   closeExport = () => this.setState({ showExport: false });
   resetToDefaults = () => {
@@ -964,19 +979,34 @@ class Component extends DCLogic {
 
     const cvGroup = this.state.cv[this.state.cvTab];
     const sidebarVisible = this.state.sidebarVisible;
+    const sidebarCollapsed = this.state.sidebarCollapsed;
 
     const asideStyle = [
       "position:sticky", "top:0", "align-self:start", "height:100vh",
-      "display:flex", "flex-direction:column", "justify-content:space-between",
-      "padding:34px 28px 30px", "border-right:1px solid rgba(31,29,26,0.22)",
-      "background:var(--ground-2, #e3dccd)",
+      "display:flex", "flex-direction:column",
+      sidebarCollapsed ? "justify-content:center" : "justify-content:space-between",
+      sidebarCollapsed ? "align-items:center" : "align-items:stretch",
+      sidebarCollapsed ? "padding:24px 10px" : "padding:34px 28px 30px",
+      "border-right:1px solid rgba(31,29,26,0.22)",
+      "background:var(--ground-2, #e3dccd)", "overflow:hidden",
       "transition:opacity 560ms ease, transform 560ms cubic-bezier(.2,.7,.2,1)",
       sidebarVisible ? "opacity:1" : "opacity:0",
       sidebarVisible ? "transform:translateY(0)" : "transform:translateY(18px)"
     ].join(";");
 
+    const contentGridStyle = [
+      "background:var(--ground, #e9e3d7)", "color:#1f1d1a",
+      "font-family:'Poppins', system-ui, sans-serif", "display:grid",
+      "grid-template-columns:" + (sidebarCollapsed ? "64px" : "312px") + " minmax(0, 1fr)",
+      "transition:grid-template-columns 420ms cubic-bezier(.2,.7,.2,1)",
+      "min-height:100vh"
+    ].join(";");
+
     return {
-      asideStyle,
+      asideStyle, contentGridStyle,
+      sidebarCollapsed,
+      toggleSidebarCollapse: this.toggleSidebarCollapse,
+      collapseToggleLabel: sidebarCollapsed ? "›" : "‹",
       projects: projects.map((d, idx) => {
         const chosen = d.thumbnailFrame != null ? d.frames[d.thumbnailFrame] : null;
         const thumb = (chosen && chosen.image) || d.frames.find((f) => f.image)?.image;
