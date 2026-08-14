@@ -72,63 +72,64 @@
 
 <div id="content" style="{{ contentGridStyle }}">
 
-  <aside style="{{ asideStyle }}">
-    <button onClick="{{ toggleSidebarCollapse }}" title="Collapse sidebar" style="cursor: pointer; position: absolute; top: 20px; right: 16px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; font-size: 15px; z-index: 2;">{{ collapseToggleLabel }}</button>
-
-    <sc-if value="{{ !sidebarCollapsed }}" hint-placeholder-val="{{ true }}">
-    <div>
-      <div style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 34px; letter-spacing: 0.04em; line-height: 1; padding-right: 34px;">
+  <header style="{{ asideStyle }}">
+    <div style="display: flex; align-items: center; gap: 28px; min-width: 0;">
+      <div style="font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 22px; letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0;">
         Carl Jude <span style="color: var(--acc-deep, #2f7d76);">Utrera</span>
       </div>
-      <div style="margin-top: 10px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #4a463f;">Graphic Design — Brand Identity</div>
-    </div>
 
-    <nav style="display: grid; gap: 2px; margin: 32px 0;">
-      <a class="rail-link" href="#work" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
-        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">01</span>
-        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Work</span>
-        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
-      </a>
-      <a class="rail-link" href="#about" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
-        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">02</span>
-        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">About</span>
-        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
-      </a>
-      <a class="rail-link" href="#cv" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
-        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">03</span>
-        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Résumé</span>
-        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
-      </a>
-      <a class="rail-link" href="#contact" style="position: relative; display: grid; grid-template-columns: 26px 1fr; align-items: baseline; padding: 11px 0; color: #1f1d1a; border-top: 1px solid rgba(31, 29, 26, 0.18); border-bottom: 1px solid rgba(31, 29, 26, 0.18); transition: color 200ms;">
-        <span style="font-size: 9px; letter-spacing: 0.14em; color: #8a8579;">04</span>
-        <span style="font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em;">Contact</span>
-        <span class="rail-bar" style="position: absolute; left: 0; right: 0; top: -1px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
-      </a>
-    </nav>
-
-    <div>
-      <div style="height: 2px; background: rgba(31, 29, 26, 0.14); margin-bottom: 14px;">
-        <div ref="{{ progressRef }}" style="height: 2px; width: 0%; background: var(--acc, #4fb9af);"></div>
-      </div>
-      <a href="mailto:hello@carljude.design" style="font-size: 12px; letter-spacing: 0.04em; color: #1f1d1a;">hello@carljude.design</a>
-      <div style="font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8a8579; margin-top: 6px;">© 2026 — Portfolio 01</div>
-
-      <sc-if value="{{ !isAdmin }}" hint-placeholder-val="{{ true }}">
-        <button onClick="{{ unlockAdmin }}" style="cursor: pointer; margin-top: 14px; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 0;">Site admin</button>
-      </sc-if>
-      <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top: 14px; display: grid; gap: 6px;">
-          <button onClick="{{ toggleEditMode }}" style="{{ editModeButtonStyle }}">{{ editModeLabel }}</button>
-          <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ openExport }}" style="cursor: pointer; text-align: left; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">Export code →</button>
-            <button onClick="{{ resetToDefaults }}" style="cursor: pointer; text-align: left; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #7a2f2f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">Reset to file defaults</button>
-          </sc-if>
-          <button onClick="{{ lockAdmin }}" style="cursor: pointer; text-align: left; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0; margin-top: 2px;">Log out</button>
-        </div>
+      <sc-if value="{{ !sidebarCollapsed }}" hint-placeholder-val="{{ true }}">
+      <nav style="display: flex; align-items: center; gap: 2px; flex-wrap: wrap;">
+        <a class="rail-link" href="#work" style="position: relative; display: flex; align-items: baseline; gap: 6px; padding: 7px 12px; color: #1f1d1a; transition: color 200ms;">
+          <span style="font-size: 9px; letter-spacing: 0.12em; color: #8a8579;">01</span>
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.05em;">Work</span>
+          <span class="rail-bar" style="position: absolute; left: 12px; right: 12px; bottom: 3px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+        </a>
+        <a class="rail-link" href="#about" style="position: relative; display: flex; align-items: baseline; gap: 6px; padding: 7px 12px; color: #1f1d1a; transition: color 200ms;">
+          <span style="font-size: 9px; letter-spacing: 0.12em; color: #8a8579;">02</span>
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.05em;">About</span>
+          <span class="rail-bar" style="position: absolute; left: 12px; right: 12px; bottom: 3px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+        </a>
+        <a class="rail-link" href="#cv" style="position: relative; display: flex; align-items: baseline; gap: 6px; padding: 7px 12px; color: #1f1d1a; transition: color 200ms;">
+          <span style="font-size: 9px; letter-spacing: 0.12em; color: #8a8579;">03</span>
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.05em;">Résumé</span>
+          <span class="rail-bar" style="position: absolute; left: 12px; right: 12px; bottom: 3px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+        </a>
+        <a class="rail-link" href="#contact" style="position: relative; display: flex; align-items: baseline; gap: 6px; padding: 7px 12px; color: #1f1d1a; transition: color 200ms;">
+          <span style="font-size: 9px; letter-spacing: 0.12em; color: #8a8579;">04</span>
+          <span style="font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.05em;">Contact</span>
+          <span class="rail-bar" style="position: absolute; left: 12px; right: 12px; bottom: 3px; height: 1px; background: var(--acc, #4fb9af); transform: scaleX(0); transform-origin: left; transition: transform 340ms cubic-bezier(.2,.7,.2,1);"></span>
+        </a>
+      </nav>
       </sc-if>
     </div>
-    </sc-if>
-  </aside>
+
+    <div style="display: flex; align-items: center; gap: 16px; flex-shrink: 0;">
+      <sc-if value="{{ !sidebarCollapsed }}" hint-placeholder-val="{{ true }}">
+        <a href="mailto:hello@carljude.design" style="font-size: 11px; letter-spacing: 0.04em; color: #1f1d1a; white-space: nowrap;">hello@carljude.design</a>
+
+        <sc-if value="{{ !isAdmin }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ unlockAdmin }}" style="cursor: pointer; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; padding: 0; white-space: nowrap;">Site admin</button>
+        </sc-if>
+        <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button onClick="{{ toggleEditMode }}" style="{{ editModeButtonStyle }}">{{ editModeLabel }}</button>
+            <sc-if value="{{ editMode }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ openExport }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;">Export →</button>
+              <button onClick="{{ resetToDefaults }}" style="cursor: pointer; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #7a2f2f; padding: 7px 10px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;">Reset</button>
+            </sc-if>
+            <button onClick="{{ lockAdmin }}" style="cursor: pointer; background: transparent; border: 0; color: #a39d8f; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 0; white-space: nowrap;">Log out</button>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <button onClick="{{ toggleSidebarCollapse }}" title="Collapse bar" style="cursor: pointer; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid rgba(31,29,26,0.3); color: #4a463f; font-size: 10px; flex-shrink: 0;">{{ collapseToggleLabel }}</button>
+    </div>
+
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(31, 29, 26, 0.14);">
+      <div ref="{{ progressRef }}" style="height: 2px; width: 0%; background: var(--acc, #4fb9af);"></div>
+    </div>
+  </header>
 
   <sc-if value="{{ showExport }}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; inset: 0; z-index: 200; background: rgba(20, 18, 15, 0.72); display: flex; align-items: center; justify-content: center; padding: 40px;">
@@ -977,31 +978,27 @@ class Component extends DCLogic {
     const sidebarCollapsed = this.state.sidebarCollapsed;
 
     const asideStyle = [
-      "position:sticky", "top:0", "align-self:start", "height:100vh",
-      "display:flex", "flex-direction:column",
-      sidebarCollapsed ? "justify-content:center" : "justify-content:space-between",
-      sidebarCollapsed ? "align-items:center" : "align-items:stretch",
-      sidebarCollapsed ? "padding:24px 10px" : "padding:34px 28px 30px",
-      "border-right:1px solid rgba(31,29,26,0.22)",
-      "background:var(--ground-2, #e3dccd)", "overflow:hidden",
-      "transition:opacity 560ms ease, transform 560ms cubic-bezier(.2,.7,.2,1)",
+      "position:sticky", "top:0", "z-index:40",
+      "display:flex", "align-items:center", "justify-content:space-between",
+      "gap:20px", "flex-wrap:wrap",
+      sidebarCollapsed ? "padding:12px 28px" : "padding:16px 32px",
+      "border-bottom:1px solid rgba(31,29,26,0.22)",
+      "background:var(--ground-2, #e3dccd)",
+      "transition:opacity 560ms ease, transform 560ms cubic-bezier(.2,.7,.2,1), padding 300ms ease",
       sidebarVisible ? "opacity:1" : "opacity:0",
-      sidebarVisible ? "transform:translateY(0)" : "transform:translateY(18px)"
+      sidebarVisible ? "transform:translateY(0)" : "transform:translateY(-18px)"
     ].join(";");
 
     const contentGridStyle = [
       "background:var(--ground, #e9e3d7)", "color:#1f1d1a",
-      "font-family:'Poppins', system-ui, sans-serif", "display:grid",
-      "grid-template-columns:" + (sidebarCollapsed ? "64px" : "312px") + " minmax(0, 1fr)",
-      "transition:grid-template-columns 420ms cubic-bezier(.2,.7,.2,1)",
-      "min-height:100vh"
+      "font-family:'Poppins', system-ui, sans-serif"
     ].join(";");
 
     return {
       asideStyle, contentGridStyle,
       sidebarCollapsed,
       toggleSidebarCollapse: this.toggleSidebarCollapse,
-      collapseToggleLabel: sidebarCollapsed ? "›" : "‹",
+      collapseToggleLabel: sidebarCollapsed ? "▼" : "▲",
       projects: projects.map((d, idx) => {
         const chosen = d.thumbnailFrame != null ? d.frames[d.thumbnailFrame] : null;
         const thumb = (chosen && chosen.image) || d.frames.find((f) => f.image)?.image;
